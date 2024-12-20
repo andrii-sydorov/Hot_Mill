@@ -1,0 +1,52 @@
+1. The elements CS6 on the page C, p.2 isn't found! Without that eleemtn RL1 and RL2 haven't any purpose!
+2. The output for lamps aren't found! C, p.2
+3. May be Yelloe_Reverse is Q0.0. MD01, p.65
+4. The elements for building signals RL6 and RL7 aren't found!
+5. The output contacts 1T ... 111T - RL7A isn't found!
+6. Internal Emergency Stop for building RL9 isn't found - C, p.3
+7. MBRG for building RL10 isn't found! But shouls be - C, p.3.
+8. Ilgner Set Cb isn;t found, what is it? C, p.3
+9. The logic of braker should be clarified! Solenoid and Voltage coil - what is is? C, p.3
+10. The output signals for RL10A aren't found! C, p.4
+11. Signals to PLC should be clarified - in anycase we shouls send some signals connected with drives, but what exactly?
+12. Many output signals for building RL8 isn't found! C, p.5
+13. Question about doorswitches - C, p.5
+14. RL79, RL80 - could be deleted? C, p.5
+15. RL12, RL14, RL15, RL16, RL18 - could be deleted? C, p.6
+16. Building the RL13 - is connected with the old sheme (logic with ampfilier) and we have output for this to pulpit. How to build? C, p.6
+17. Reset button isn't found. C, p.6
+18. RL17, RL18, RL19, RL20, RL21, RL22 and CON1, CON2 could be deleted? And what should we send to HMI and what signals we are getting from power circuit? C, p.7
+19. For building the RL23 we are using RL36 and RL21 thay could be deleted
+20. RL96 and RL97 could be deleted? C, p.8
+21. We need exactly know the dependencies between speed setpoint for Mill and Edger. Do we need manual setpoint for Mill and Edger (joystick or HMI)? C, p.9
+22. The Edger and the Mill have the same breaker system, should be clarified? C, p.11
+23. Some speed setpoint should be internal and only several external! Do we need output analog signal for Tachogenerator? RL39 - Mill Stall Relay. Speed convertions for another converters. C, p.18
+24. Some external  signal for RL33 aren't found! C, p.20
+25. The Signals for building RL34 aren't found. EBRG and PB2! C, p.20
+26. Question like before with brakes for Edges! C, p.20.
+27. The output signals RL34A aren't found, signals to PLC! C, p.21
+28. We have the signals to RL75, but we haven't signals to build the same for Mill. Why? C, p.22
+29. Signals for building the RL82 aren't found. C, p.22
+30. The button to build signal RL76 aren't found! C, p.22
+31. RL77 and RL37 could be deleted? C, p.22
+32. Safety for power of Mill? Contactor control and circuit breaker! C, p.24
+33. The control of Mill and Edger should be clarified, with this komplziert sheme!
+34. RL45, RL46, RL47, RL48 could be deleted? C, p.32
+35. RL49 some external signal. C, p.32
+36. RL50 CS1 and buttons aren't found! C, p.32
+37. Q30.2 has another meanings in new shema.
+38. The output signals for RL50A not found and signals to PLC. C, p33   
+39. Any output for tha lamps. C, p.34
+40. The button to buils RL70 aren't found, do we need it general? RL70 builds from the ampfilier logic and we have indication for this. C, p.34
+41. RL53, RL54, RL55 could be deleted! C, p.34.
+42. Breaker for the shear. C, p.35
+43. The signal for building RL60 isn't found. C, p.35
+44. The logic of contactors should be clarified. C, p.35
+45. CS1 isn't found, RL62 could be deleted? C, p.36
+46. RL63 many input signals aren't found! C, p.36
+47. The output signals for RL63 isn't found! C, p.36
+48. Not clear the destionation and purpose. C, p.46 - QW1012, QW1014, QW1016, QW1018
+49. The new sheme p.69 the building the output and input signal!
+50. The new sheme p.70 the building the output signal! QW1022 and QW1024.
+51. The new sheme p.70 the building the output signal! For what?
+52.   

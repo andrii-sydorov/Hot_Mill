@@ -1,0 +1,193 @@
+////////////////////////////////////////////////////////////
+//////////////////// page 1 ////////////////////////////////
+////////////////////////////////////////////////////////////
+
+RL4 - Breast Rolls Healthy
+RL4 = RL10 AND RL15
+
+RL25 - Earth Fault
+
+RL5 - is energized with door switches 
+
+
+
+////////////////////////////////////////////////////////////
+//////////////////// page 2 ////////////////////////////////
+////////////////////////////////////////////////////////////
+
+RL1 - Estop
+RL1 = (NOT RL1(time delay) OR RL1) AND RL2/A AND NOT RL1/A AND NOT RL5
+External - RL2/A, RL1/A (F41 AND F42) = DRM04.A106.DI0 (DRM04, p.34)
+Internal - RL1, RL5(door switches, haven't any, may be should be External signals)
+RL1 = (NOT RL1(time delay) OR RL1) AND A106.DI0 AND NOT RL5
+
+RL2 = RL1(time delay)
+
+RL6 - Control Available Breast Roll1
+RL6 = RL2 AND (RL4 OR NOT RL9) AND (ON OR (RL6 AND ON_N))
+Internal - RL2, RL4, RL9, RL6
+External - ON_N_OFF (is deleted according, why not clear)
+Q10.1 = RL6
+
+
+RL40 - temp Relay
+RL40 = true (may be some electrical issue)
+PLC circuit should be true - Panel F-Supply, but should be deleted why?
+
+RL7 - Start Breast Roll1
+RL7 - RL6 AND RL1
+Internal - RL6
+External - RL1 (I10.0)
+RL7 = RL6 AND I10.0
+
+CON1 - Breast Roll1 Conractor
+CON1 = RL9
+Internal - RL9
+CON1 is used for Supplying the old convreter, in our shematic wasn't found. may be we should also use it!. Is control from converter. How we should resolve it.
+
+RL8 - Enable Breast Roll1
+RL5 = RL32 AND RL23C
+Internal - RL32
+External - RL23C (C, p.8) F1 - F52 - may be also internal, should be consider later
+RL8 = RL32 AND RL23C
+
+
+////////////////////////////////////////////////////////////
+//////////////////// page 3 ////////////////////////////////
+////////////////////////////////////////////////////////////
+
+RL39 - temp Relay
+RL39 = NOT XTPUR AND V1MOR
+External - XTPUR, V1MOR - not found in drawings
+
+RL11 - Control Available Breast Roll2
+RL11 = RL2 AND (RL4 AND NOT RL14) AND (ON OR (RL11 AND ON_N))
+Internal - RL2, RL4 (Breast Roll Healty, should consider left and right), RL14, RL11
+External - ON_N_OFF - should be deleted 
+Q10.0 = RL11
+
+RL33 - Breast Roll2 Enable with Mill Exit
+RL33 = RL11/K AND NOT RL13/K
+External - RL11K, RL13K - F1 ... F71 - isn't found
+
+RL12 - Start Breast Roll2
+RL12 = RL11 AND RL1
+Internal - RL11
+External - RL1 (F65 ... F66) - I10.1
+RL12 = RL11 AND I10.1
+
+RL32 - Breast Roll1 Enable with Turntable Manual
+RL32 = RL36/D AND NOT RL44/D
+Internal - RL36/D, RL44/D (F1 ... F250)
+RL32 = RL36/D AND NOT RL44/D
+
+CON2 - Breast Roll2 Contactor
+CON2 = RL14
+Internal RL14
+CON2 is used for Supplying the old convreter, in our shematic wasn't found. may be we should also use it!. Is control from converter. How we should resolve it.
+
+RL13 - Enable Breast Roll2
+RL13 = (RL33 OR RL23/C) AND RL39 AND RL12 AND (RV2-1 OR L4.K034)
+Internal - RL33, RL39, RL12, RL23/C (internal logik)
+External - RV2-1, L4.K034 (F68 ... F62) - are not found
+RL13 = (RL33 OR RL23/C) AND RL39 AND RL12 AND (RV2-1 OR L4.K034)
+
+Contacts of RL13 are used in purple area should be checked!
+
+
+////////////////////////////////////////////////////////////
+//////////////////// page 4 ////////////////////////////////
+////////////////////////////////////////////////////////////
+
+Converter Breast Roll1
+
+RL9 is energized with converter and control the main contactor, may be the start command komms from another relay, we should know how exactly the converter controlled (relay or plc)
+How is known now we starts the converter with RL7, and RL2 and RL1 stopped it, RL8 - enable
+
+Q10.2 = RL9
+RL10 - Breast Roll1 Healthy, should be send to MES PLC (P, 16)
+
+RL9 - Control of the main contactor
+RL10 - Drive Healthy
+RL30 - Zero Speed
+
+
+////////////////////////////////////////////////////////////
+//////////////////// page 5 ////////////////////////////////
+////////////////////////////////////////////////////////////
+
+Converter Breast Roll2
+
+RL14 is energized with converter and control the main contactor, may be the start command komms from another relay, we should know how exactly the converter controlled (relay or plc)
+How is known now we starts the converter with RL12, and RL2 and RL1 stopped it, RL13 - enable
+
+Q10.3 = RL14
+RL15 - Breast Roll2 Healthy, should be send to MES PLC (P, 16)
+
+RL14 - Control of the main contactor
+RL15 - Drive Healthy
+RL31 - Zero Speed
+
+////////////////////////////////////////////////////////////
+//////////////////// page 6 ////////////////////////////////
+////////////////////////////////////////////////////////////
+
+RL16 - Control Available Tilt Pot
+RL16 = RL6/H
+External - RL6/H (F1 ... F141) - A107.DI0
+RL16 = A107.DI0
+Q10.4 = RL16
+
+RL19 - temp Realay
+RL19 = RL12/H AND RL26 AND RL16
+Internal - RL26, RL16
+External - RL12/H (F1 ... F142) - A107.DI1
+RL19 = A107.DI1 AND RL26 AND RL16
+
+RL17 - Auto
+RL17 = A107.DI2
+
+RL18 - Enable
+RL18 = RL15/H
+External - RL15/H (F1 ... F146) - A107.DI3
+RL18 = A107.DI3
+
+RL26 - Tilt Pot Interlock
+RL26 = ((LS-A AND RL16) OR RL26) AND NOT RL22
+Internal - RL16, RL26, RL22
+External - LS-A (F1 ... F147) - A108.DI0
+RL26 = ((A108.DI0 AND RL16) OR RL26) AND NOT RL22
+A102.DO0 = RL26
+
+RL21 - Ingot Raise
+RL21 = NOT RL28(time delay) AND ((I10.2 AND RL21) OR I10.3) AND NOT RL22
+
+RL22 - Ingot Lower
+RL22 = NOT RL28(time delay) AND ((I11.0 AND RL22) OR I11.1) AND NOT RL21
+
+RL28 - time delay Relay
+RL28 = RL22
+Internal - RL22
+
+
+////////////////////////////////////////////////////////////
+//////////////////// page 7 ////////////////////////////////
+////////////////////////////////////////////////////////////
+
+Converter Tiltpot
+
+A102.DO1 = RL25 AND RL20
+RL25 - Earth Fault from Earth fault Relay
+RL20 - Tilt Pot Health, should be send to MES PLC (P, 16)
+We have the same input twice.... F150 - F154
+
+CON3 - Control of the main contactor
+RL20 - Drive Healthy
+
+////////////////////////////////////////////////////////////
+//////////////////// page 7 ////////////////////////////////
+////////////////////////////////////////////////////////////
+
+The output is deleted
+
+

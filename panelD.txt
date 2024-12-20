@@ -1,0 +1,428 @@
+//////////////////////////////////////////////////////
+////////////////// page 1 ////////////////////////////
+//////////////////////////////////////////////////////
+
+RL65 - power supply dc Ok
+RL66 - input AC ok
+
+RL65 AND RL66 - Panel D-supply OK - lose!!!
+
+//////////////////////////////////////////////////////
+////////////////// page 2 ////////////////////////////
+//////////////////////////////////////////////////////
+
+RL3 - Mill Screwdowns Control Available
+RL3 = RL1 AND ((RL19 AND RL22) OR (NOT RL17 AND NOT RL18)) AND (Reset OR MillScrewDownControl_ON OR (RL3 AND R3/SDC/1 AND MillScrewDownControl_ON_N)
+Internal - RL1, RL19, RL22, RL17, RL18, RL3
+External - Reset(unfound), R3/SDC/1(unfound), MillScrewDownControl(should be clarified with customer)
+DRA.A101.DO2 = RL3
+DRA.A101.DO3 = RL3
+The connection of RL3 after removing switches is unclear.
+Q11.0 = RL3
+
+RL4 - Edger Screwdowns Control Available
+RL4 = RL1 AND ((RL32 AND RL35) OR (NOT RL30 AND NOT RL31)) AND ((RL4 AND EdgerScrewDownControl_ON_N) OR (CS2_OFF AND EdgerScrewDownControl_ON))
+Internal - RL1, RL32, RL35, RL30, RL31, RL4
+External - CS2_OFF(should be clarified with customer), EdgerScrewDownControl(should be clarified with customer)
+The connection of RL4 after removing switches is unclear.
+Q11.2 = RL4
+
+RL5 - Turntable Control Available
+RL5 = RL1 AND ((RL48 AND RL50) OR (NOT RL46 AND NOT RL47)) AND ((CS2_OFF AND TurntableControl_ON) OR (RL5 AND R3/TC/1 AND TurntableControl_ON_N))
+Internal - RL1, RL48, RL50, RL46, RL47, RL5
+External - CS2(unfound and not deleted), R3/TC/1(unfound and not deleted), TurntableCOntrol(unfound and not deleted)
+DRA.A101.DO0 = RL5
+DRA.A101.DO1 = RL5
+Q10.6 = RL5
+
+RL1 - Emergency Stop Relay
+RL1 = (NOT RL1(time delay) OR RL1) AND NOT MillEmergencyStopInPulpit AND NOT RL6
+Internal - RL1, RL6
+External - MillEmergencyStopInPulpit (DRA.A111.DI0)
+RL1 = (NOT RL1(time delay) OR RL1) AND NOT DRA.A111.DI0 AND NOT RL6
+
+RL2 - Delayed Emergency Stop
+RL2 = RL1(time delay)
+Internal - RL1
+
+
+//////////////////////////////////////////////////////
+////////////////// page 3 ////////////////////////////
+//////////////////////////////////////////////////////
+
+RL6 - door switches
+
+
+//////////////////////////////////////////////////////
+////////////////// page 4 ////////////////////////////
+//////////////////////////////////////////////////////
+
+RL60 - time delay relay
+RL60 = RL12
+Internal - RL12
+
+CON7 - Mill ScrewDown Right Brake
+CON7 = RL60(time delay) AND CON1
+Internal - RL60, CON1
+
+CON8 - Mill ScrewDown Right Brake
+CON8 = RL60(time delay) AND CON2
+Internal - RL60, CON2
+
+CON9 - Edger Screwdowns Control
+CON9 = RL23 AND NOT RL33
+
+RL55 - Auto Relay
+RL55 = RL8
+External - RL8 (from MES PLC, p.25, isn't defined)
+
+RL57 - Mill Screws Drive Enables
+RL57 = RL12 AND NOT RL20
+Internal - RL12, RL20
+
+//////////////////////////////////////////////////////
+////////////////// page 5 ////////////////////////////
+//////////////////////////////////////////////////////
+
+RL7 - Drives Start
+RL7 = RL63 OR (NOT RL60 AND I12.0)
+External - RL63(Maras Drive Enable, not found), RL60(not found)
+RL60 and RL63 theoretical are taken from D, p.7 - but should be clarified
+
+RL8 - High
+RL8 = (RL16 AND Down_3) OR (UP_3)
+Internal - RL16
+External - Down_3, UP_3 - I11.2
+RL8 = (RL16 AND I11.2) OR (I11.2)
+
+RL9 - Medium
+RL9 = (UP_2_3 OR Down_2_3) AND NOT RL8
+Internal - RL8
+External - UP_2_3, Down_2_3 - I11.3
+RL9 = (I11.3 OR I11.3) AND NOT RL8
+
+RL10 - Low
+RL10 = UP_3_2_1 OR Down_3_2_1
+External - UP_3_2_1, Down_3_2_1 - I12.0
+RL10 = NOT RL8 AND NOT RL9 AND (I12.0 OR I12.0)
+
+RL11 - Direction Down
+RL11 = DOWN_1_2_3
+External - Down_1_2_3 - I12.1
+RL11 = I12.1
+
+D131 - Mill Screwdown Controller Mill Screw Over-Ride
+Q10.5 = I12.2
+
+CON10 - Clutch Contactor (may be we shouldn't use this)
+CON10 = RL58 AND (RL20 OR CON10)
+Internal - RL58, RL20
+
+RL12 - Drive Start
+RL12 = (CS2_Both AND RL7) OR RL13
+Internal - RL13, RL7
+External - CS_Both - I12.3
+RL12 = (I12.3 AND RL7) OR RL13
+Q11.1 = RL12
+
+RL13 - Start Right Hand Only
+RL13 = CS_Drive OR RL13 OR (RL60 (Maras_ON) AND RL64(OFF)) AND RL7
+Internal - RL13, RL7
+External - CS2_Drive - I13.0
+RL13 = I13.0 OR RL13 OR (RL60 (Maras_ON) AND RL64(OFF)) AND RL7
+
+RL58 - De-Energized Clutch
+RL58 = CS_Drive OR RL13 OR (RL60 (Maras_ON) AND RL64(OFF))
+Internal - RL13
+External - CS2_Drive - I13.0
+RL58 = I13.0 OR RL13 OR (RL60 (Maras_ON) AND RL64(OFF))
+
+RL14 - Up Limit Reached
+RL14 = NOT LSA AND NOT LSA-1
+External - LSA, LSA-1 - DRA.A108.DI0
+RL14 = NOT DRA.A108.DI0
+
+RL15 - Down Limit Reached
+RL15 = NOT LSB
+External - LSB - DRA.A108.DI1
+RL15 = DRA.A108.DI1
+
+RL16 - Slowdown Limit
+RL16 = NOT LSC
+External - LSC - DRA.A108.DI2
+RL16 = DRA.A108.DI2
+
+CON1 - Right Mill Screwdown Contactor
+CON1 = RL17
+Internal - RL17
+
+CON2 - Left Mill Screwdown Contactor
+CON2 = RL18
+Internal - RL18
+
+//////////////////////////////////////////////////////
+////////////////// page 7 ////////////////////////////
+//////////////////////////////////////////////////////
+
+The MARAS and Eurotherm data excahnge is unclear!
+
+
+//////////////////////////////////////////////////////
+////////////////// page 8 ////////////////////////////
+//////////////////////////////////////////////////////
+
+Mill Screwdown1 (Right Hand)
+
+RL17 is energized with converter and control the main contactor, may be the start command komms from another relay, we should know how exactly the converter controlled (relay or plc)
+RL13 start the converter, RL15, RL15, RL16 - limit switches
+
+RL20 - Zero Speed
+RL19 - Drive Healthy
+RL17 - Control the main contactor
+
+RL19 - Breast Roll1 Healthy, should be send to MES PLC (P, 16)
+
+
+//////////////////////////////////////////////////////
+////////////////// page 9 ////////////////////////////
+//////////////////////////////////////////////////////
+
+Mill Screwdown2 (Left Hand)
+
+RL18 is energized with converter and control the main contactor, may be the start command komms from another relay, we should know how exactly the converter controlled (relay or plc)
+We use differen terminal in converter!!! We have the limit switch for the right converter, and any for left! 
+
+RL22 - Drive Healthy
+RL21 - Drive Ready
+RL18 - Control the main contactor
+
+RL22 - Breast Roll1 Healthy, should be send to MES PLC (P, 16)
+
+
+//////////////////////////////////////////////////////
+////////////////// page 10 ///////////////////////////
+//////////////////////////////////////////////////////
+
+RL23 - Drives Start (Edge Scewdown)
+RL23 = (CS2_ON AND RL54) OR ((OUT_3_2_1 OR IN_3_2_1) AND RL4)
+Out - UP, In - Down
+Internal - RL54
+External - CS2_ON - I14.3, OUT_3_2_1 and IN_3_2_1 - I15.2
+RL23 = (I14.3 AND RL54) OR ((I15.2 OR I15.2) AND RL4)
+Q11.3 = RL23
+
+
+RL24 - High
+RL24 = CS2_ON AND (OUT_3 OR IN_3)
+Out - UP, In - Down
+External - OUT_3, IN_3 - I15.0, CS2_ON - I14.3
+RL24 = I14.3 AND (I15.0 OR I15.0)
+
+RL25 - Medium
+RL25 = CS2_ON AND (OUT_3_2 OR IN_3_2) AND NOT RL24
+Out - UP, In - Down
+External - OUT_3_2, IN_3_2 - I15.1, CS2_ON - I14.3
+Internal - RL24
+RL25 = I14.3 AND (I15.1 OR I15.1) AND NOT RL24 
+
+RL26 - Low
+RL26 = CS2_ON AND ((RL54 AND RL4) OR (OUT_3_2_1 OR IN_3_2_1)) AND NOT RL24 AND NOT RL25
+Out - UP, In - Down
+Internal - RL24, RL25, RL54, RL4
+External - OUT_3_2_1, IN_3_2_1 - I15.2, CS2_ON - I14.3
+RL26 = I14.3 AND ((RL54 AND RL4) OR (I15.2 OR I15.2)) AND NOT RL24 AND NOT RL25
+
+RL27 - Direction In
+RL27 = CS2_ON AND IN_1_2_3
+Out - UP, In - Down
+External - IN_1_2_3 - I15.3, CS2_ON - I14.3
+RL27 = I14.3 AND I15.3
+
+RL53 - temp Relay
+RL53 = RL27
+Internal - RL27
+
+HydraulicReleaseValve = RL53
+Internal - RL53
+DRA.A102.DO0 = HydraulicReleasevalve
+
+RL54 - Auto
+Not found!!!
+
+RL28 - Out Limit Reached
+RL28 = NOT LSA AND NOT L/S AND NOT L/S AND NOT L/S
+External - LAS, L/S - DRA.A108.DI3
+RL28 = NOT DRA.A108.DI3
+
+RL29 - In Limit Reached
+RL29 = NOT LSB AND NOT L/S
+External - LSB, L/S - DRA.A109.DI0
+RL29 = NOT DRA.A109.DI0
+
+CON3 - Edger Screwdown1 Contactor
+CON3 = RL30
+Internal - RL30
+
+CON4 - Edger Screwdown2 Contactor
+CON4 = RL31
+Internal - RL31
+
+
+//////////////////////////////////////////////////////
+////////////////// page 11 ///////////////////////////
+//////////////////////////////////////////////////////
+
+Must to pay attention may be we should predefined some speed via HMI!!!
+
+
+//////////////////////////////////////////////////////
+////////////////// page 12 ///////////////////////////
+//////////////////////////////////////////////////////
+
+Edger Screwdown1 (Right hand)
+
+RL30 is energized by converter and control the main contactor, may be the start command komms from another relay, we should know how exactly the converter controlled (relay or plc)
+We use differen terminal in converter!!! We have the limit switch for the right converter, and any for left!
+We are Starting with RL23 
+
+RL33 - Zero Speed
+RL32 - Drive Healthy
+RL30 - Control the main contactor
+
+RL33 - Edger Screwdown RightHand, should be send to MES PLC (P, 16)
+But should be RL32 - Drive healthy like in previous converter
+
+
+//////////////////////////////////////////////////////
+////////////////// page 13 ///////////////////////////
+//////////////////////////////////////////////////////
+
+Edger Screwdown2 (Left Hand)
+
+RL31 is energized by converter and control the main contactor, may be the start command komms from another relay, we should know how exactly the converter controlled (relay or plc)
+We use differen terminal in converter!!! We have the limit switch for the right converter, and any for left!
+We are Starting with RL23 
+
+RL35 - Drive Healthy
+RL34 - Drive Ready
+RL31 - Control the main contactor
+
+RL35 - Edger Screwdown LeftHand, should be send to MES PLC (P, 16)
+
+
+//////////////////////////////////////////////////////
+////////////////// page 14 ///////////////////////////
+//////////////////////////////////////////////////////
+
+RL36 - MC Mode
+RL36 = RL5 AND NOT RL42 AND (Forward_3_2_1 OR Reverse_3_2_1)
+Internal - RL5, RL42
+External - Forward_3_2_1, Reverse_3_2_1 - I13.2
+RL36 = RL5 AND NOT RL42 AND (I13.2 OR I13.2)
+
+RL37 - High Speed
+RL37 = RL5 AND ((NOT RL42 AND (Forward_3 OR Reverse_3)) OR (NOT RL36 AND (Left_3 OR Right_3)))
+Internal - RL5, RL42, RL36
+External - Forward_3, Reverse_3 - I13.3; Left_3, Right_3 - I16.1
+RL37 = RL5 AND ((NOT RL42 AND (I13.3 OR I13.3)) OR (NOT RL36 AND (I16.1 OR I16.1)))
+
+RL38 - Medium Speed
+RL38 = RL5 AND ((NOT RL42 AND (Forward_3_2 OR Reverse_3_2)) OR (NOT RL36 AND (Left_3_2 OR Right_3_2))) AND NOT RL37
+Internal - RL5, RL36, RL42, RL37
+External - Forward_3_2, Reverse_3_2 - I14.0; Left_3_2, Right_3_2 - I16.2
+RL38 = RL5 AND (NOT RL42 AND (I14.0 OR I14.0)) OR (NOT RL36 AND (I16.2 OR I16.2))) AND NOT RL37
+
+RL39 - Low Speed
+RL39 = RL5 AND (RL42 OR RL36) AND NOT RL38 AND NOT RL37
+External - RL5, RL42, RL36, RL38, RL37
+
+RL40 - Forward Drive1
+RL40 = RL5 AND ((NOT RL42 AND Forward_3_2_1) OR (NOT RL36 AND Right_3_2_1))
+Internal - RL5, RL42, RL36
+External - Forward_3_2_1 - I14.1; Right_3_2_1 - I16.3
+RL40 = RL5 AND ((NOT RL42 AND I14.1) OR (NOT RL36 AND I16.3))
+
+RL41 - Forward Drive2
+RL41 = RL5 AND ((NOT RL42 AND Forward_3_2_1) OR (NOT RL36 AND Left_3_2_1))
+Internal - Rl5, RL42, RL36
+External - Forward_3_2_1 - I14.2; Left_3_2_1 - I17.0
+RL41 = RL5 AND ((NOT RL42 AND I14.2) OR (NOT RL36 AND I17.0))
+
+RL42 - TMC Mode
+RL42 = RL5 AND NOT RL36 AND (Left_3_2_1 OR Right_3_2_1)
+Internal - RL5, RL36
+External - Left_3_2_1, Right_3_2_1 - I16.0
+
+RL1 AND RL40 AND RL36 D410 - any output!
+MC Mode and TMC Mode should be discussed!
+
+//////////////////////////////////////////////////////
+////////////////// page 15 ///////////////////////////
+//////////////////////////////////////////////////////
+
+RL43 - Drives ON
+RL43 = RL5 AND RL1 AND ((NOT RL36 AND NOT RL42) OR RL43)
+Internal - RL5, RL36, RL42, RL43
+External - RL1 - isn't found
+Q10.7 = RL43
+
+RL44 - Auto Ref Relay Turn Table
+RL44 = (NOT RL23/C AND NOT RL36 AND NOT RL52 AND NOT RL42) OR (RL23/C AND RL44(time delay) AND RL43 AND RL52)
+Internal - RL23/C (should be consider in Panel C), RL36, RL52, RL42, RL44, RL43
+
+RL52 - temp Relay
+RL52 = RL23/C
+Internal - RL23/C (should be consider in Panel C)
+
+RL45 - Drives Enable
+RL45 = RL36 OR RL42 OR (RL52 AND RL44)
+Internal - RL36, RL42, RL44, RL52
+
+CON5 - Turntable Right Contactor
+CON5 = RL46
+Internal - RL46
+
+CON6 - Turntable Left Contactor
+CON6 = RL47
+Internal - RL47
+
+
+//////////////////////////////////////////////////////
+////////////////// page 16 ///////////////////////////
+//////////////////////////////////////////////////////
+
+To pay attention to setpoint to converter turntable
+
+
+//////////////////////////////////////////////////////
+////////////////// page 17 ///////////////////////////
+//////////////////////////////////////////////////////
+
+Turntable (Right Hand)
+
+RL46 is energized by converter and control the main contactor, may be the start command komms from another relay, we should know how exactly the converter controlled (relay or plc)
+We use differen terminal in converter!!! We have the limit switch for the right converter, and any for left!
+We are Starting with RL43 wuth some time delay!
+
+RL49 - Zero Speed
+RL48 - Drive Healthy
+RL46 - Control the main contactor
+
+RL49(RL48 according shematic) - Edger Screwdown LeftHand, should be send to MES PLC (P, 16)
+
+
+//////////////////////////////////////////////////////
+////////////////// page 18 ///////////////////////////
+//////////////////////////////////////////////////////
+
+Turntable (Left Hand)
+
+RL47 is energized by converter and control the main contactor, may be the start command komms from another relay, we should know how exactly the converter controlled (relay or plc)
+We use differen terminal in converter!!! We have the limit switch for the right converter, and any for left!
+We are Starting with RL43 wuth some time delay!
+
+RL50 - Drive Healthy
+RL51 - Zero Speed
+RL47 - Control the main contactor
+
+RL51(RL50 according shematic) - Edger Screwdown LeftHand, should be send to MES PLC (P, 16)

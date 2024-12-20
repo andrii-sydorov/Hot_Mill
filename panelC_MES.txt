@@ -1,0 +1,1034 @@
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 2 ////////////////////
+/////////////////////////////////////////////////////////
+
+RL1 - Mill Only
+RL1 = ((RL23 AND RL1) OR CS6_MILL ) AND NOT RL2
+Internal - RL23, RL2
+External - CS6_Mill - not found!!!
+
+RL2 - Edger Only
+RL2 = ((RL23 AND RL2) OR CS6_Edger ) AND NOT RL1
+Internal - RL23, RL1
+External - CS6_Edger - not found!!!
+
+RL3 - Speed Limit 1
+RL3 = CS7_60MPM_90MPM
+External - CS7_60MPM_90MPM - I17.1
+RL3 = I17.1
+
+RL4 - Speed Limit 2
+RL4 = CS7_90MPM
+External - CS7_90MPM - I17.2
+RL4 = I17.2
+
+Lamp
+Yellow_Forward = RL6A - not found!!!
+Green_30MPM = NOT RL4 AND NOT RL3 - not found!!!
+Green_60MPM = NOT RL4 AND RL3 - not found!!!
+Green_90MPM = RL4 - not found!!!
+Yellow_Reverse = RL7A - not found!!! (may be Q0.0)
+
+RL5S - Inching Relay
+RL5S = CS2_Inch_Roll
+External - CS2_Inch_Roll - I17.3
+RL5 = I17.3
+
+RL6 and RL6A - Forward Relay
+RL6 = RL8 AND CSPF AND LIMIT1 AND MC2 AND XMBR AND NOT R19 AND NOT RL7
+Internal - RL7, RL8
+External - CSPF, LIMIT1, MC2, XMBR, R19 - everything isn't found!
+Q12.1 = RL6
+Q2.0 = RL6
+
+RL7 and RL7A - Reverse Relay
+RL7 = RL8 AND CSPF AND LIMIT1 AND MC1 AND EMBR AND NOT R20 AND NOT RL6
+Internal - RL8, RL6
+External - CSPF, LIMIT1, MC1, EMBR, R20 - everything aren't found! 
+Q12.2 = RL7
+Q2.1 = RL7
+
+1T ... RL7A ... 111T - not found!
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 3 ////////////////////
+/////////////////////////////////////////////////////////
+
+RL9 - Interlocks healthy (890 Power On Delay - 6s)
+RL9 = AND NOT RL2 AND ((AND NOT RL17 AND RL 19) OR (RL17 AND RL19)) AND NOT EFRL1 AND NOT RL13 AND NOT RL16 AND RL27 AND RL29 AND NOT INTERMAL EM.STOP AND NOT RL14 AND NOT RL15 AND RL12
+Internal - RL2, RL17, RL18, RL19, RL13, RL16, EFRL1, RL27...
+External - INTERNAL EM.STOP - not found! 
+
+RL10 and RL10A - Mill Control Available
+RL10 = CS2_INCH_ROLL AND NOT ILGNER SET CB AND RL9(time delay) AND NOT MBRG AND (PB1 AND NOT CB6A(circuit breaker) OR RL10)
+Internal - RL10, RL9
+External - MBRG (not found), PB1 (not found), CB6 (not found), ILGNER SET CB (not found), Finish_Inch_Roll (I17.3)
+
+RL11 - Breaker Closing Relay
+VSR1 - Electromatic SM125/120 Breaker Open Volts OK To CLose Up
+RL11 = CS2_INCH_ROLL AND NOT ILGNER SET CB AND NOT RL79 AND RL78 AND RL10 AND (CS4_N_CLOSE OR NOT RL28) AND (RL11 OR VSR1)
+Internal - RL79, RL78, RL10, RL28
+External - Finish_Inch_Roll (I17.3), ILGNER SET CB (not found), CS4_N_CLOSE (I18.1), VSR1 (not found)
+RL11 = I17.3 AND NOT ILGNER SET CB AND NOT RL79 AND RL78 AND RL10 AND (I18.1 OR NOT RL28) AND (RL11 OR VSR1) 
+
+CON4 - Breaker Closing Solenoid Coil Contactor
+CON4 = RL11 AND CS4_CLOSE AND RL28
+Internal - RL11, RL28
+External - CS4_CLOSE (I18.2)
+CON4 = RL11 AND I18.2 AND RL28
+Do we need output for breaker?
+
+CON5 - Breaker Under Voltage Coil Contactor
+CON5 = RL11
+
+C1, C95, C96, С9Х, C101, C104, C102
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 4 ////////////////////
+/////////////////////////////////////////////////////////
+
+106/6 ... RL10A ... 111/6  - Control Available - isn't found!!!
+106/7 ... RL10A ... 111/7  - Control Available - isn't found!!!
+
+C85 - Earth Fault
+C86 - Drive Stalled
+C87 - Generators Mismatched
+C89 - Generator Field Controller Fault
+C90 - Motor Field COntroller Fault
+C91 - Internal Emergency Stop
+C92 - Generator1 Overvolts
+C93 - Generator3 Overvolts
+C94 - Overspeed
+C96 - Motor Generator Over.Temp.
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 5 ////////////////////
+/////////////////////////////////////////////////////////
+
+RL8 - Control ON
+RL8 = PulPit Emergency Stop AND K23 AND K3 AND R1 AND R10 AND R15 AND NOT RL80 AND ((RL36A AND RL35) OR RL1) AND ((RL21 AND RL11) OR RL2) AND (CS5_ON OR (RL8 AND CS5_N_ON))
+Internal - RL36, RL35, RL1, RL21, RL2, RL11, RL8
+External - Pulpit Emergency Stop, K23, K3, R1, R10, R15 - not found
+
+Lamp Breaker Open and Control ON
+BreakerOpen = NOT RL21
+Q11.6 = NOT RL21
+
+ControlOn = RL8
+Q11.5 = RL8
+
+RL78 - Converters On
+RL78 = CON1 AND CON2
+
+RL79 - Generator Voltage Test - could be deleted?
+RL79 = ((NOT RL10A AND NOT RL25) OR RL79) AND CS8_TEST
+
+RL80 - some raley with time delay
+RL80 = AND NOT DoorSwitches1 .... AND NOT DoorSwitches8 AND NOT OverrideKeySwitch
+
+CB1 - Breaker Shunt Up
+CB1 = AND NOT DoorSwitches1 .... AND NOT DoorSwitches8 AND NOT OverrideKeySwitch AND RL80
+
+С1, C120, C134, C129, C130, C5, 
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 6 ////////////////////
+/////////////////////////////////////////////////////////
+
+
+RL12 - Mill Overspeed (Mechanically Reset) + Tacho Loss - could be deleted?
+RL12 = C1... M1 o/s AND M2 o/s ....C150 AND NOT RL81
+
+RL13 - Mill Stall
+RL13 = NOT RL31 OR (NOT RESET AND RL13)
+Internal - RL31, RL13
+External - RESET (not found) 
+Q11.4 = RL13
+
+RL14 - Mill Generator 1 Overvoltage  - could be deleted?
+RL15 - Mill Generator 2 Overvoltahe - could be deleted?
+RL16 - Mill Generators Mismatched  - could be deleted?
+
+RL81 - Mill Tacho Loss - could be deleted?
+RL81 = (RL21 AND NOT RL26) OR RL81
+
+Reset button isn't found....
+C1, C150, C159
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 7 ////////////////////
+/////////////////////////////////////////////////////////
+
+
+RL17 - Protection Select Mill  - could be deleted?
+RL17 = C1... NOT COS6 C171
+
+RL18 - Mill Generator1 Selected  - could be deleted?
+RL19 - Mill Generator2 Selected  - could be deleted?
+RL20 - Both Generators Selected  - could be deleted?
+
+RL21 and RL21A - Mill Loop Breaker Closed  - could be deleted? Or not see next Page!
+RL21 = C1... MB-o C176
+
+RL22 - Voltage Loop Enable  - could be deleted?
+RL22 = NOT RL21 AND RL10
+
+CON1 - Mill Generator Field Controller Contactor  - could be deleted?
+CON3 - Mill Motor Field Controller Contactor  - could be deleted?
+
+C1, C171, C172, C173, C176
+
+What contacts  from circuit breaker should we catch and send to HMI?  
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 8 ////////////////////
+/////////////////////////////////////////////////////////
+
+RL23 and RL23A and RL23C - Run Relays
+RL23 = (RL7 OR RL8) AND (RL21 OR RL36)
+Internal - RL7, RL8, RL21, RL36
+Q0.3 = NOT RL23
+Q1.0 = RL23
+Q1.1 = NOT RL23
+Q1.2 = RL23
+Q0.1 = NOT RL23
+Q0.2 = RL23
+
+RL95 - Mill/Edger Enables
+RL95 = (RL7 OR RL8) AND (RL21 OR RL26)
+Internal - RL7, RL8, RL21, RL36
+Q1.3 = RL95
+
+RL96 - Field Economy Mill/Edger (time delay relay 10sec) - could be deleted?
+RL96 = RL95
+Internal - RL95
+
+RL97 - Field Economy Mill/Edger  - could be deleted?
+RL97 = RL96(time delay)
+Internal - RL96
+
+L88... NOT RL95 ...L90 - Q1.3
+
+F1... RL23A ...F52  - Entry Breast Rolls Tilt Pot
+
+H1... NOT RL23 ...H70
+                      - Edger Entry Rolls
+H1...  RL23A   ...H73
+
+D1... NOT RL23A ...D337
+                      - Turntable
+D1...    RL23A  ...D344
+
+L68... RL23C ...L70
+F1... RL23C ...F76 - Exit Breast Rolls
+
+K1... NOT RL23 ...K67
+                     - Mill Exit table
+K1...   RL23   ...K69
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 9 ////////////////////
+/////////////////////////////////////////////////////////
+
+
+Mill & Edger Speed References
+To pay attention to speed setpoint for Mill and for Edger, thay are some how connected...
+IW1100 - setpoint from pulpit! 
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 10 ///////////////////
+/////////////////////////////////////////////////////////
+
+Electrical Circuit of Generators and Motors
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 11 ///////////////////
+/////////////////////////////////////////////////////////
+
+CON4 - Contactor to turn on/off Mill Breaker Solenoid
+CON5 - Contactor to turn on/off Mill Breaker Under Voltage Coil
+CON9 - Contactor to turn on/off Edger Breaker Solenoid
+CON10 - Contactor to turn on/off Edger Breaker Under Voltage Coil
+
+C314, C316, C318, C319, C321, C322, C324, C325
+
+VSR1 - DC control
+BR20 - AC/DC
+
+The logic for breaker, do we need it? Solenoid?
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 12 ///////////////////
+/////////////////////////////////////////////////////////
+
+Voltage and Current measurement
+VSR2 - Generator1 Overvoltage 
+VSR3 - Generator2 Overvoltage
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 13 ///////////////////
+/////////////////////////////////////////////////////////
+
+Mill Generators Fields Controller
+RL28 - Zero Speed
+RL27 - Healthy
+RL24 - 3 Phase Supply Slave
+CON1 - contactor to supply Mill Generators Fields Controller
+COS1F, COS2F
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 14 ///////////////////
+/////////////////////////////////////////////////////////
+
+Some unknwon drawings
+RL25
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 15 ///////////////////
+/////////////////////////////////////////////////////////
+
+Electrical circuit with ampfilier
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 16 ///////////////////
+/////////////////////////////////////////////////////////
+
+Electrical circuit with ampfilier
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 17 ///////////////////
+/////////////////////////////////////////////////////////
+
+Mill Motors Fields Controller
+
+RL26 - Tacho OK
+RL29 - Healthy
+RL30 - 3 Phase Supply Slave
+CON3 - contactor to supply Mill Motors Fields Controller
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 18 ///////////////////
+/////////////////////////////////////////////////////////
+
+Elecrical circuit woth ampfilier
+RL31 - Mill Stall Realay (delay 10 sec) - could be deleted?
+С520, C9, C27, C3, C23, C5, C13, C11, C19, C21, C15, C7, C523, C526, C541, C542, C543, C544
+
+C9 ... C523
+QW1000 - Mill Runout Rolls. Auto Reference
+C9 ... C526
+QW1004 - Mill Exit Rolls. Auto Reference
+C9 ... C541
+QW1006 - Entry Breast Roll. Auto Reference - could be internal signal - F
+C9 ... C542
+QW1002 - Edger Entry Rolls. Auto Reference
+C9 ... C543
+Q1010 - Turntable Auto Reference - could be internal signal - D
+C9 ... C544
+QW1008 - Exit Breast Roll. Auto Reference - could be internal - F
+C9 ... C520
+QW1020 - Tachogenerator - do we need it?
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 19 ///////////////////
+/////////////////////////////////////////////////////////
+
+Elecrical circuit woth ampfilier
+RL32 - Generator Volts Mismatch
+C15, C9, C7, C27, C21, C23, C3, C5, C13, C19
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 20 ///////////////////
+/////////////////////////////////////////////////////////
+
+Edger Control circuit
+RL33 - temp Relay
+RL33 = CS2_INCH_ROLL AND NOT ILGNER SET CB AND NOT RL1 AND NOR EFRL2 AND NOT RL76 AND RL51 AND RL39 AND RL42 AND RL40 AND NOT RL77 AND RL75
+Internal - RL1, RL76, RL51, RL39, RL42, RL40, RL77, RL75
+External - CS2_INCH_ROLL (I17.3), ILGNER SET CB, EFRL (could be deleted)  
+
+RL34, RL34A - Edger Control Available
+RL34 = (RL33 AND NOT EBRG AND PB2) OR RL34
+Internal - RL33, RL34
+External - EBRG (isn't found), PB2 (isn't found)
+
+RL35 - Breaker Closing Realy
+RL35 = RL34 AND (CS4_N_C OR NOT RL41) AND (RL35 OR NOT VSR4)
+Internal - RL34, RL41, RL35
+External - CS4_N_C (I18.3), VSR4 (could be deleted?)
+RL35 = RL34 AND (I18.3 NOT RL41) AND (RL35 OR NOT VSR4)
+
+CON9 - Breaker Closing Solenoid Contactor
+CON9 = RL35 AND CS4_C AND RL41
+Internal - RL35, RL41
+External - CS4_C (I19.0)
+CON9 = RL35 AND I19.0 AND RL41
+
+CON10 - Breaker Ubder Voltage Coil Contactor
+CON10 = RL35
+Internal - RL35
+
+C1089, C1090, C592, C595, C596, C597
+P00603 ... EBRG ... PS - not found!
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 21 ///////////////////
+/////////////////////////////////////////////////////////
+
+SIGNALS TO PLC
+Lamps
+106/10 ... RL34A ... 111/10 - isn't found!
+106/11 ... RL34A ... 111/11 - isn't found!
+C1081 - Earth Fault
+C1082 - Drive Stalled
+C1084 - Generator Field Fault
+C10810 - Motor Field Fault
+C1086 - Speed Controller Fault
+C1087 - Generator Overvolts
+C1088 - Overspeed
+C1090 - Motor Generator Over.Temp
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 22 ///////////////////
+/////////////////////////////////////////////////////////
+
+RL75 - Edger Overspeed Mechanically Reset
+RL75 = O/S
+External - O/S (I1.0)
+RL75 = I1.0
+Why we haven't the same signal for Meel Overspeed?
+
+RL82 - Edger Ref.Enable
+RL82 = K/S_ON AND EMBR
+External - K/S_ON (not found), EMBR (not found)
+
+RL76 - Edger Stall
+RL76 = RL43(time delay) OR (NOT Some_Button AND NOT RESET AND RL76)
+Internal - RL76
+External - Some_Button (not found), RESET (not found)
+
+RL77 - Edger Generator Overvolts - could be deleted?
+RL77 = (NOT Some_Button AND NOT RESET AND RL77) OR VSR5
+Internal - RL77
+External - Some_Button (not found), RESET (not found), VSR5 (not found)
+
+RL36, RL36A - Main Breaker Closed
+RL36  = EB-a
+External - EB-a (I1.1)
+RL36 = I1.1
+
+RL37 - Voltage Loop Enable - could be deleted?
+RL37 = NOT RL36 AND RL34
+Internal - RL36, RL34
+
+CON8 - Edger Motor Field Controller Contactor - could be deleted?
+CON8 = RL44
+Internal - RL44
+
+C588... RL10 AND RL34 ...C589 - Control Available
+Q11.7 = RL10 AND RL34
+
+C588... NOT RL36 ...C590 - Edger Breaker Open
+Q12.0 = NOT RL36
+
+
+C1, C580, C599, C600, C591, C584
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 23 ///////////////////
+/////////////////////////////////////////////////////////
+
+Edger Motor Circuit
+VSR5 - Generator Overvolts (could be deleted)
+VSR4 - Breaker Volts (could be deleted)
+EFRL2 - some relay (could be deleted)
+BR7, BR4 (could be deleted)
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 24 ///////////////////
+/////////////////////////////////////////////////////////
+
+Edger Generator Field Controller (Master)
+RL51 (could be deleted), CON6, CB7
+C665, C667
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 25 ///////////////////
+/////////////////////////////////////////////////////////
+
+Edger Generator Field Controller (Slave)
+RL39 (could be deleted), CON7, CB9
+C711, C712, C713, C696, C697, C698
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 26 ///////////////////
+/////////////////////////////////////////////////////////
+
+Edger Drive Speed And Current Loops
+RL40 (could be deleted), RL41 (could be deleted)
+C739, C736, C737, C739, C740, C741, C444, C443
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 27 ///////////////////
+/////////////////////////////////////////////////////////
+
+Edger Motor Field Controller
+RL91 (could be deleted)
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 28 ///////////////////
+/////////////////////////////////////////////////////////
+
+Edger Motor Field Control Stack
+RL44 (could be deleted), RL42 (could be deleted), CB10
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 29 ///////////////////
+/////////////////////////////////////////////////////////
+
+Electrical circuit with ampfilier
+RL43 - Edger Stall - could be deleted? Output of old sheme
+C16, C15, C24, C8, C11, C13, C23
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 30 ///////////////////
+/////////////////////////////////////////////////////////
+
+Shear circuits
+VSR6, BR22
+RL67 - Shear Stall - could be deleted? - output of old sheme
+C16, C8, C15, C24, C11, C13, C23
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 31 ///////////////////
+/////////////////////////////////////////////////////////
+
+Electrical sircuit with ampfilier
+RL73 - Generator Volts Unmatched - could be deleted?
+PCB - circuit with ampfilier
+C15, C9, C7, C21, C27, C23, C3, C5, C13
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 32 ///////////////////
+/////////////////////////////////////////////////////////
+
+RL45 - Shear Generator2 Deselected - could be deleted?
+RL45 = G1COS_B
+External - G1COS_B (isn't found)
+
+RL46 - Shear Generator2 Deselected - could be deleted?
+RL46 = G2COS_B
+External - G2COS_B (isn't found)
+
+RL47 - Shear Motor1 Deselected - could be deleted?
+RL47 = M1COS_B
+External - M1COS_B (isn't found)
+
+RL48, RL48A - Shear Motor2 Deselected - could be deleted?
+RL48 = M2COS_B
+External - M2COS_B (isn't found)
+
+RL49 - temporaty relay
+RL49 = (NOT RL48 AND (RL45 OR RL46)) OR (NOT RL47 AND NOT RL48) AND NOT EFRL3 AND NOT RL52 AND NOT RL55 AND RL69 AND RL70 AND RL71 AND NOT RL53 AND NOT RL54
+External - EFRL3 (could be deleted)
+Intenal - RL48, RL45, RL46, RL47, RL52, RL55, RL69, RL71, RL53, RL54 
+
+RL50, RL50A - Shear Control Available
+RL50 = NOT RL80 AND RL49 AND ((RL61 AND CS1_ON) OR (RL50 AND CS1_N_ON)) AND NOT PB1 AND NOT 52NI AND NOT R3/SC/1
+Internal - RL80, RL49, RL61, RL50
+External - CS1_ON (not found), CS1_N_ON (not found), PB1 (not found), 52NI (not found), R3/SC/1 (not found) 
+Q30.0 = RL50
+
+Lamp:
+ControlAvailable = RL50
+ContactorOpen = NOT RL60
+
+C1, C990, C991, C992, C993, C903, C904, C913, C909
+C1 ... RL50 ... C912 - Control Available
+C1 ... NOT RL60 ... C914 - Contactor Open
+Q30.2 = Contactor Open - not clear!
+C5
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 33 ///////////////////
+/////////////////////////////////////////////////////////
+
+Signals to PLC
+Electrical circuit with lamps
+106/12 ... RL50A ... 111/12 - not found!
+106/13 ... RL50A ... 111/13 - not found!
+C896 - Earth Fault
+C897 - Drive Stalled
+C898 - Generators Mismatched
+C900 - Generator Field Fault
+C901 - Speed Control Fault
+C902 - Generator1 Overvolts
+C903 - Generator2 Overvolts
+C908 - Pressure Low
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 34 ///////////////////
+/////////////////////////////////////////////////////////
+
+Shear starts from here
+SLC1 - Shear ON Local Control
+External - LOCAL_Local_Desk (I30.0)
+SLC1 = I30.0
+Q30.3 = SLC1 - not for lamp another meaning
+
+LampSD = SLC1
+LocalLamp = SLC1 - any output for this!!!
+
+RL70 - Shear at Top (closed between 10 - 360)
+RL70 = RS-3 
+External - RS-3 (I30.2)
+LampSD = RS-3
+Q30.1 = RS-3
+LocalLamp = RS-3
+
+RL52 - Shear Stall
+RL52 = RL67 OR (NOT SomeButton AND NOT Reset AND RL52)
+Internal - RL67, RL52
+External - Somebutton (not found), Reset (not found)
+Building the RL67 from the old sheme isn't clear!
+
+RL53 - Shear Generator1 Overvoltage - could be deleted?
+RL53 = (NOT RL45 AND VSR7) OR (NOT SomeButton AND NOT Reset AND RL53)
+Internal - RL45, RL53
+External - VSR7 (not found), RESET (not found), Somebutton (not found)
+
+RL54 - Shear Generator2 Overvoltage - could be deleted?
+RL54 = (NOT RL46 AND VSR8) OR (NOT SomeButton AND NOT Reset AND RL54)
+Internal - RL46, RL54
+External - VSR8 (not found), RESET (not found), Somebutton (not found)
+
+RL55 - Shear Generator Mismatched - could be deleted?
+RL55 = (RL73 AND NOT RL45 AND NOT RL46) OR (NOT SomeButton AND NOT Reset AND RL55)
+Internal - RL73, RL45, RL46, RL55
+External - Somebutton (not found), RESET (not found)
+
+
+RS - Rotatory Switch
+RS1 - Maintain
+RS2 - Reduce Difference
+RS3 - Tables Interlock
+RS4 - Start Cycle P/B
+C1, C931, C940, C941
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 35 ///////////////////
+/////////////////////////////////////////////////////////
+
+CON15 - Shear Breaker Solenoid Contactor
+CON15 = RL50 AND ((NOT VSR6 AND NOT RL56) OR RL62) AND (NOT RL60 OR CON 15) AND RL65(time delay) AND NOT RL63
+Internal - RL50, RL62, RL56, RL60, RL65, RL63
+External - VSR6 (not found)
+
+CON16 - Shear Breaker Indervolyage Coil Contactor
+CON16 = RL50 AND (NOT VSR6 AND NOT RL56) OR RL62
+Internal - RL50, RL56, RL62
+External - VSR6 (not found)
+
+RL56 - Shear Off
+RL56 = (SLC1 AND SD_OFF) OR (NOT SLC1 AND LOCAL_OFF)
+External - SLC1 (I30.0), SD_OFF and LOCAL_OFF (I30.3)
+RL56 = (I30.0 AND I30.3) OR (NOT I30.0 AND I30.3)
+
+RL57 - Shear Reverse
+RL57 = (SLC1 AND SD_R) OR (NOT SLC1 AND LOCAL_R)
+External - SLC1 (I30.0), SD_R and LOCAL_R (I31.0)
+RL57 = (I30.0 AND I31.0) OR (NOT I30.0 AND I31.0)
+
+RL58 - Shear Forward
+RL58 = (SLC1 AND SD_F) OR (NOT SLC1 AND LOCAL_F)
+External - SLC1 (I30.0), SD_F and LOCAL_F (I31.1)
+RL58 = (I30.0 AND I31.1) OR (NOT I30.0 AND I31.1)
+
+RL59 - Shear Run
+RL59 = (SLC1 AND SD_RUN) OR (NOT SLC1 AND LOCAL_RUN)
+External - SLC1 (I30.0), SD_RUN and LOCAL_RUN (I31.2)
+RL59 = (I30.0 AND I31.2) OR (NOT I30.0 AND I31.2)
+
+RL60 - Breaker Closed
+RL60 = MB
+External - MB (not found!)
+
+RL61 - Pressure Check Relay
+RL61 = N
+External - N (not found!)
+
+CON11 - Motor Fields
+CON11 = RL60
+Internal - RL60
+
+CON12 - Motor1 Field
+CON12 = NOT RL47
+Internal - RL47
+
+CON13 - Motor2 Field
+CON13 = NOT RL48
+Internal - RL48
+
+C1, C960, C961
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 36 ///////////////////
+/////////////////////////////////////////////////////////
+
+RL62 - temporary Relay
+RL62 = (NOT RL56 OR NOT RL50) AND CS1_N_ON AND (RL62 OR RL60)
+Internal - RL56, RL50, RL62, RL60
+External - CS1_N_OFF (not found)
+
+CON14 - Shear Contactor
+CON14 = (((NOT SLC1 AND SD AND PB_ShearCut) OR (SLC1 AND Local AND PB_ShearCut)) AND ESR2 AND C_Push AND PSIR AND R3/S0/1 AND ((L/SA AND L/SB) OR (L/SC AND L/SD)) AND ((RL59 AND NOT RS_4) OR RL57 OR RL58)) OR (RL59 AND RS_1 AND RL63)
+Internal - RL63, RL59
+External - SLC1 (I30.0), RS-4 (I32.1), RS-1 (I31.3), others not found!
+
+RL63, RL63A - Brake Control
+RL63 = CON14
+The output signal isn't found and this page also!
+
+RL64 - Shear Run
+RL64 = RL59 AND RL63 AND NOT RS_2
+Internal - RL59, RL63
+External - RS_2 (I32.0)
+RL64 = RL59 AND RL63 AND NOT I32.0
+
+RL65 - Trip Timer
+RL65 = RL63 OR RL56
+Internal - RL63, RL56
+
+RL66 - Breaker Open Voltage Loop Enable - could be deleted?
+RL66 = RL50 AND NOT RL60
+Internal - RL50, RL60 
+
+RL68 - Both Generator Selected - could be deleted?
+RL68 = NOT RL45 AND NOT RL46
+
+CON20 - Field Economy - could be deleted?
+CON20 = RL63A
+C985, C986, C987, C988, C989
+10-21 ... NOT RL63 ... 10-22
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 37 ///////////////////
+/////////////////////////////////////////////////////////
+
+Some Electrical circuit
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 38 ///////////////////
+/////////////////////////////////////////////////////////
+
+Shear Protection Circuit
+VSR7 - Generator1 Overvoltage
+VSR8 - Generator2 Overvoltage
+BR5, BR6
+EFRL3
+C1049, C1050, C1051, C1052, C1053, C1054, C1055, C1056
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 39 ///////////////////
+/////////////////////////////////////////////////////////
+
+Motor1 Field, Motor2 Filed
+VSR9
+VSR10
+CON12, CON13, CON11, CON20
+BR7, BR8, BR9 - AC/DC bridge
+C2009, C2007, C2014, C2013
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 40 ///////////////////
+/////////////////////////////////////////////////////////
+
+Shear Controls
+CON14 - Shear Brakes, CON15, CON16
+QPR1, QPR2
+C2034, C2035, C2038, C2039, C2040, C2042, C2043, C2045, C2046
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 41 ///////////////////
+/////////////////////////////////////////////////////////
+
+Shear Generator Field Controller (Master)
+RL69, CON17, CB11
+C2087, C2089
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 42 ///////////////////
+/////////////////////////////////////////////////////////
+
+Shear Generator Field Controller (Slave)
+RL70, CON18, CB13
+C3030, C3031, C3032, C3033, C3034, C3035
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 43 ///////////////////
+/////////////////////////////////////////////////////////
+
+Shear Drive Speed and Current Loops
+RL71, RL72
+C3057, C444, C443 
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 44 ///////////////////
+/////////////////////////////////////////////////////////
+
+Field control
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 45 ///////////////////
+/////////////////////////////////////////////////////////
+
+Some electrical circuit
+VSR1 ... VSR10
+
+
+/////////////////////////////////////////////////////////
+///////////////////////////// List 46 ///////////////////
+/////////////////////////////////////////////////////////
+
+QW1012 - not clear the destination point
+QW1014 - not clear the destination point
+QW1016 - not clear the destination point
+QW1018 - not clear the destination point
+
+////////////////////////////////////////////////////////
+//////////////////////// PLC ///////////////////////////
+////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////
+////////////////////// RIO01 - A108 ///////////////////
+///////////////////////////////////////////////////////
+
+I17.1 - Speed Limit Select 60 MPM. Speed Limit 1.
+RL3 - Speed Limit 1 (C. p.5)
+RL4  = I17.1
+
+I17.2 - Speed Limit Select 90 MPM. Speed Limit 1.
+RL4 - Speed Limit 1 (C. p.5)
+RL4 = I17.2
+
+
+///////////////////////////////////////////////////////
+////////////////////// RIO01 - A116 ///////////////////
+///////////////////////////////////////////////////////
+
+Q11.4 - Mill Stall
+RL13 - Mill Stall (C, p.6)
+RL13 = RL31 OR (RL13 AND NOT Reset)
+RL31 - Mill Stall Realay (C, p.18) - from analogue sheme, not clear!!!!
+
+Q11.5 - Mill Control On
+RL8 - Control On (C, p.5)
+RL8 used on it's logik many signals, that are not present, for example CS3!!!
+
+Q11.6 - Mill Breaker Open
+In new sheme we are using RL21, but in old sheme RL21 
+RL21 - Mill Loop Breaker Closed
+To build this signals we used MB-a, thar has another terminal C, p.7
+Not clear!!!!
+
+Q11.7 - Edger Control Available
+What Relay respond isn't clear, but we are using C588 and C589
+C588... RL10 AND RL34 ...C589 (C, p.22)
+Not clear!!!!
+
+
+///////////////////////////////////////////////////////
+////////////////////// RIO01 - A117 ///////////////////
+///////////////////////////////////////////////////////
+
+Q12.0 - Edger Breaker Open
+What Relay respond isn't clear, but we are using C588 and C590
+C588... NOT RL36 ...C590
+Not clear!!!!
+
+///////////////////////////////////////////////////////
+////////////////////// RIO01 - A108 ///////////////////
+///////////////////////////////////////////////////////
+
+I17.3 - Rolling/Inch Inching
+RL5 - Inching Relay
+I17.3 = CS2_Inch_ROll
+RL5 = I17.3
+
+
+///////////////////////////////////////////////////////
+////////////////////// RIO01 - A109 ///////////////////
+///////////////////////////////////////////////////////
+
+I18.0 - Rolling/Inch
+C80 include not only CS2, but another signal! (C, p.2)
+CS2
+Not Clear!!!
+
+I18.1 - Mill Breaker N.
+RL11 - Breaker Closing Relay (C, p.3)
+I18.1 = CS4_N_Close
+RL11 = I18.1 AND NOT RL79 AND RL78 AND RL10 AND (I18.1 OR NOT RL28) AND (RL11 OR NOT VSR1)
+
+I18.2 - Mill Breaker Close.
+CON4 - Breaker Closing Solenoid Coil Contactor(C, p.3)
+I18.2 = CS4_Close
+CON4 = RL11 AND I18.2 AND NOT RL25
+
+I18.3 - Edger Breaker N.
+RL35 - Breaker Closing Relay (C, p.20)
+I18.3 = CS4_N_C
+RL35 = C80 AND RL34 AND (I18.3 OR NOT RL41) AND (RL35 OR NOT VSR4)
+Not Clear!!!
+
+
+///////////////////////////////////////////////////////
+////////////////////// RIO01 - A110 ///////////////////
+///////////////////////////////////////////////////////
+
+I19.0 - Edger Breaker Close
+CON9 - Breaker Closing Solenoid Contactor (C, p.20)
+I19.0 = CS4_C
+CON9 = C1 AND RL35 AND I19.0 AND RL41
+
+
+///////////////////////////////////////////////////////
+////////////////////// RIO02 - A101 ///////////////////
+///////////////////////////////////////////////////////
+
+I30.0 - Shear Local Desk(Local)/Shear Desk(SD) Local Control On.
+SLC1 - Shear Local Sontrol On (C, p.34)
+I30.0 = Local_LocalDesk
+
+
+I30.2 - Shear At Top Closed Between 10-350
+RL63 -  (C, p.36)
+RL70 = I30.2
+
+I30.3 - Shear Controllers Shear Off.
+RL56 - Shear Off (C, p.35)
+RL56 = (NOT I30.0 AND SD_OFF) OR (I30.0 AND Local_OFF)
+Not clear!!!Where is SD?
+
+
+///////////////////////////////////////////////////////
+////////////////////// RIO02 - A105 ///////////////////
+///////////////////////////////////////////////////////
+
+Q30.0 - Shear. Control Available
+RL50 - Shear Control Available (C, p.32)
+Not clear!!!! RL49, CS1
+
+Q30.1 - Shear. Shear At Start
+RL50 - Shear Control Available (C, p.32)
+Not clear!!!! C911
+
+Q30.2 - Shear_OFF
+NOT RL60 - Contactor Open (C, p.32)
+RL60 - Breaker Closed
+Not clear!!!! RL60, C960
+
+Q30.3 - Shear On Local Control
+May be is connected with SLC, because not found in old sheme 
+
+
+///////////////////////////////////////////////////////
+////////////////////// RIO02 - A102 ///////////////////
+///////////////////////////////////////////////////////
+
+I31.0 - Shear Controllers Inch Reverse
+RL57 - Shear Reverse (C, p.35)
+RL57 = (NOT I30.0 AND SD_R) OR (I30.0 AND Local_R)
+Not clear!!! SD and Local
+
+I31.1 - Shear Controllers Inch Forward
+RL58 - Shear Forward (C, p.35)
+RL58 = (NOT I30.0 AND SD_F) OR (I30.0 AND Local_F)
+Not clear!!! SD and Local
+
+I31.2 - Shear Controllers Shear Run
+RL59 - Shear Run (C, p.35)
+RL59 = (NOT I30.0 AND SD_RUN) OR (I30.0 AND Local_RUN)
+Not clear!!! SD and Local
+
+I31.3 - Shear closes 10 - 350
+CON14 - Shear Contactor, RL63 - Brake Control (C, p.36)
+RS1 - closes 10 - 360 
+RL63 = RL59 AND I31.3 AND RL63
+Not Clear!!! It's used on parallel branch
+
+
+///////////////////////////////////////////////////////
+////////////////////// RIO02 - A103 ///////////////////
+///////////////////////////////////////////////////////
+
+I32.0 - Shear Opens 80 - 350
+RL64 - Shear Run (C, p.36) 
+I32.0 = RS-2
+RL64 = RL59 AND RL63 AND NOT I32.0
+
+I32.1 - Shear Opens 15 - 350 Shear Contactor
+RL63 AND CON14 - Shear Contactor and Brake Control (C, p.36) 
+I32.1 = RS-4
+NOT Clear!!!
+
+
+///////////////////////////////////////////////////////
+////////////////////// PLC01 - A207 ///////////////////
+///////////////////////////////////////////////////////
+
+Q2.0 - Forward Relay (NO)
+RL6A - Forward Relay (C, p.2)
+
+
+Q2.1 - Reverse Relay (NO)
+RL7A - Reverse Relay (C, p.2)
+
+
+///////////////////////////////////////////////////////
+////////////////////// PLC01 - A202 ///////////////////
+///////////////////////////////////////////////////////
+
+I1.0 - Edger Control Edger Overspeed Machinenically Reset
+RL75 - Edger Overspeed Mechanically Reset (C, p.22)
+I1.0 = O/S
+RL75 = I1.0
+
+I1.1 - Edger Control Main Breaker Closed
+RL36 - Main Breaker Closed (C, p.22)
+I1.1 = EB-a
+RL36 = I1.1
