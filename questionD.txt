@@ -8,13 +8,13 @@ D, p.1 - P, p.16
 7. Do we need use Clutch? What is it? D, p.5
 8. We must decide generally, predefined speed comes from Pult or from HMI? For every converter! D, p.6
 9. Logic connected with MARAS? D, p.7
-10. We need know exactly the meanings terminal of converter ti build converter logic))) The RL17 logic should be clarified may be connected with safety... D, p.8 There are some speed to the converter Left Hand. 
-11. RL19 should be send to Panel P. D, p.8 and P, p.16
-12. For the converter of left hand the same RL22 should be send to panel P. D, p.9 - P, p.16.
+10. We need know exactly the meanings terminal of converter to build converter logic))) The RL17 logic should be clarified may be connected with safety... D, p.8 There are some speed to the converter Left Hand. 
+11. RL19 should be send to Panel P. D, p.8 and P, p.16 - added by Casani DRA.
+12. For the converter of left hand the same RL22 should be send to panel P. D, p.9 - P, p.16. - added by Casani DRA.
 13. For RL54 - Auto mode logic isn't found! 
 14. But this terminal 275 are getting from Analog output converter - and control the release valve (for this we have digital output!) D, p.12
-15. We in previous converter logic of main contactor control and sending data to PLC (RL35).
+15. We in previous converter logic of main contactor control and sending data to PLC (RL35) - added by Casani in DRA.
 16. We must clarified the TMC Mode and MC Mode, and sending data to PLC D, p. 14
 17. RL1 from 412 isn't found. D, p.15
-18. Like in previous converter the control of contactor and sending data to plc. That's is not clear the wrong naming or Relay. D, p17 and C, p.16...
+18. Like in previous converter the control of contactor and sending data to plc. That's is not clear the wrong naming or Relay. D, p17 and C, p.16... added by Casani in DRA.
 19. Isn't found I13.1, but we have it in new shema.

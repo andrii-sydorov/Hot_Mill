@@ -74,7 +74,7 @@ CON9 = RL23 AND NOT RL33
 
 RL55 - Auto Relay
 RL55 = RL8
-External - RL8 (from MES PLC, p.25, isn't defined)
+External - RL8 (from MES PLC, p.25, isn't defined) - isn't found!
 
 RL57 - Mill Screws Drive Enables
 RL57 = RL12 AND NOT RL20
@@ -180,7 +180,7 @@ RL20 - Zero Speed
 RL19 - Drive Healthy
 RL17 - Control the main contactor
 
-RL19 - Breast Roll1 Healthy, should be send to MES PLC (P, 16)
+RL19 - Breast Roll1 Healthy, should be send to MES PLC (P, 16) -added by Casani DRA
 
 
 //////////////////////////////////////////////////////
@@ -196,7 +196,7 @@ RL22 - Drive Healthy
 RL21 - Drive Ready
 RL18 - Control the main contactor
 
-RL22 - Breast Roll1 Healthy, should be send to MES PLC (P, 16)
+RL22 - Breast Roll1 Healthy, should be send to MES PLC (P, 16) - added by Casani DRA
 
 
 //////////////////////////////////////////////////////
@@ -289,7 +289,7 @@ RL33 - Zero Speed
 RL32 - Drive Healthy
 RL30 - Control the main contactor
 
-RL33 - Edger Screwdown RightHand, should be send to MES PLC (P, 16)
+RL33 - Edger Screwdown RightHand, should be send to MES PLC (P, 16) - added by Casani in DRA
 But should be RL32 - Drive healthy like in previous converter
 
 
@@ -307,7 +307,7 @@ RL35 - Drive Healthy
 RL34 - Drive Ready
 RL31 - Control the main contactor
 
-RL35 - Edger Screwdown LeftHand, should be send to MES PLC (P, 16)
+RL35 - Edger Screwdown LeftHand, should be send to MES PLC (P, 16) - added by Casani in DRA
 
 
 //////////////////////////////////////////////////////
@@ -353,7 +353,7 @@ RL42 = RL5 AND NOT RL36 AND (Left_3_2_1 OR Right_3_2_1)
 Internal - RL5, RL36
 External - Left_3_2_1, Right_3_2_1 - I16.0
 
-RL1 AND RL40 AND RL36 D410 - any output!
+RL1 AND RL40 AND RL36 D410 - added by Casani in DRA.
 MC Mode and TMC Mode should be discussed!
 
 //////////////////////////////////////////////////////
@@ -408,7 +408,7 @@ RL49 - Zero Speed
 RL48 - Drive Healthy
 RL46 - Control the main contactor
 
-RL49(RL48 according shematic) - Edger Screwdown LeftHand, should be send to MES PLC (P, 16)
+RL49(RL48 according shematic) - Edger Screwdown LeftHand, should be send to MES PLC (P, 16) - added by Casani in DRA
 
 
 //////////////////////////////////////////////////////
@@ -425,4 +425,4 @@ RL50 - Drive Healthy
 RL51 - Zero Speed
 RL47 - Control the main contactor
 
-RL51(RL50 according shematic) - Edger Screwdown LeftHand, should be send to MES PLC (P, 16)
+RL51(RL50 according shematic) - Edger Screwdown LeftHand, should be send to MES PLC (P, 16) - added by Casani in DRA
