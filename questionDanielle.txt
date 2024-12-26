@@ -8,7 +8,10 @@
 2. F, p.2 we haven't this switch, could it be replace via HMI or should be deleted completely?
 3. The same question like in 2, but about Control Available Breast Roll2 - repalce via HMI?
 4. For building the signal RL13 - F, p.3 we need the signal from LTAC and VOLMER and send data to VOLMER, but we haven't input and output for this.
-5. F, p.8 the digital output isn't found! 
+5. F, p.5 - we need analog input for speed reference of BreastRoll2 but we have Analog output - DRM04.A103.A0.
+6. F, p.7 - we need analog input for speed reference of Tilt Pot but we haven't any.
+6. F, p.7 - we need digital output for contacts 201 and 200.
+6. F, p.8 the digital output isn't found! 
 
 ////////////// D ///////////////////////
 1. We haven't output to build signal for "Power Supply Panel D" - D, p.1

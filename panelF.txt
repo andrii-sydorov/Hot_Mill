@@ -17,8 +17,8 @@ RL5 - is energized with door switches
 
 RL1 - Estop
 RL1 = (NOT RL1(time delay) OR RL1) AND RL2/A AND NOT RL1/A AND NOT RL5
-External - RL2/A, RL1/A (F41 AND F42) = DRM04.A106.DI0 (DRM04, p.34)
-Internal - RL1, RL5(door switches, haven't any, may be should be External signals)
+Internal - RL2/A, RL1/A (F41 AND F42) = DRM04.A106.DI0 (DRM04, p.34)
+External - RL1, RL5(door switches, haven't any, may be should be External signals)
 RL1 = (NOT RL1(time delay) OR RL1) AND DRM04.A106.DI0 AND NOT RL5
 
 RL2 = RL1(time delay)

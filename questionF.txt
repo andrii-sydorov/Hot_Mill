@@ -10,3 +10,4 @@
 10. The meaning the contacts on converter. RL10 (F, p.4)- Breast Roll1 Healthy, should be send to MES PLC (P, 16). RL15 (F, p.5)- Breast Roll2 Healthy, should be send to MES PLC (P, 16). RL20 (F, p.7)- Tilt Pot Healthy, should be send to MES PLC (P, 16). - sending signals to PLC added by Casani in DRM04
 11. We have the same signals twice F150 - F154 (Galich), 150 - 154 (Casani)... Which should we use?
 12. In scheme of Casani he used DRM04.A109.DI1 and DRM04.A109.DI2  (p.36) but in old sheme this contsct aren't responding (F, p.6)
+13. We need analog input for reference from Mill Exit Panel - F, p.5
