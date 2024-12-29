@@ -1,0 +1,223 @@
+BreastRoll1 Entry
+Eurotherm 572-1800 - manual isn't found
+
+C9 - 24V for digital inputs
+C3 - Start - RL7
+C5 - Enable - RL8 AND NOT RL30
+B8 - Program Stop - RL1
+B9 - Coast Stop - RL2
+
+A1 - Signal 0V
+A2 - Speed Setpoint #1 - from Mill Control (C541 - C, p.18) control by NOT RL32
+A3 - Speed Setpoint #2/Current Demand
+A8 - Total Setpoint
+B4_A4_B3_A6 - Setpoint Ramp Input(A4 - Speed setpoint no.3 (ramped)) - from Turntable in manual mode - D, p.16 control by RL32
+B5 - Zero Speed - RL30
+B6 - Drive Healthy - RL10 (should be send to PLCsend to PLC)
+B7 - Drive Ready
+
+D5_D6 - External Contactor - RL9
+
+
+///////////////////////////////////
+
+BreastRoll2 Entry
+Eurotherm 572-1800 - manual isn't found
+
+C9 - 24V for digital inputs
+C3 - Start - RL12
+C5 - Enable - RL13 AND NOT RL31
+B8 - Program Stop - RL1
+B9 - Coast Stop - RL2
+
+A1 - Signal 0V
+A2 - Speed Setpoint #1 - from Mill Control (C544 - C, p.18) controlled by NOT RL33
+A3 - Speed Setpoint #2/Current Demand
+A8 - Total Setpoint
+B4_A4_B3_A6 - Setpoint Ramp Input(A4 - Speed setpoint no.3 (ramped)) - from Mill Exit Panel in manual mode - D, p.16 control by RL33 - some external AI
+B5 - Zero Speed - RL31
+B6 - Drive Healthy - RL15 (should be send to PLCsend to PLC)
+B7 - Drive Ready
+
+D5_D6 - External Contactor - RL14
+
+
+///////////////////////////////////
+
+Tilt Pot
+Eurotherm 572-0570 - manual isn't found
+
+C9 - 24V for digital inputs
+C3 - Start - RL9(time delay)
+C5 - Enable - RL18
+B8 - Program Stop - RL1
+B9 - Coast Stop - RL2
+
+A1 - Signal 0V
+A2 - Speed Setpoint #1 
+A3 - Speed Setpoint #2/Current Demand
+A8 - Total Setpoint
+B4_A4_B3_A6 - Setpoint Ramp Input(A4 - Speed setpoint no.3 (ramped)) - from H111 control by NOT RL17 - some external AI
+by pressing Stop Button could be some speed setpoint, not clear what exactly.
+B5 - Zero Speed 
+B6 - Drive Healthy - RL20 (should be send to PLCsend to PLC)
+B7 - Drive Ready
+
+D5_D6 - External Contactor - CON3
+
+
+///////////////////////////////////
+
+Mill Screwdown1 (Right Hand) Drive
+Eurotherm 590P-0380 - manual isn't found
+
+From the logic below this drive has setpoint from pulpit (manual mode) and system Maras(automatic), the purpose of C6 - C8 isn't clear, should be clarified! May be depends in the limit switch the part of ways work maras another part manual speed setpoint.
+
+C9 - 24V for digital inputs
+C3 - Start - RL12(time delay)
+C5 - Enable - (RL21 OR RL13) AND RL57
+C6 - Symmetrical current clamps/Asymetrical (bipolar) current clamps (ON = bipolar) = RL15 OR NOT RL61(from Maras)
+C6 = ON - AI4(A5) - negative current clamp and (AI5)A6 - positive current clamp
+C6 = OFF - AI5(A6) - Main current limit and AI4(A5) - speed setpoint #4
+C7 - Ramp hold input - RL14
+C8 - Current Demand Isolate - RL16
+C8 = OFF - AI2(A3) - Speed Setpoint #2
+C8 = ON - AI2(A3) - Current Demand
+B8 - Program Stop - RL1
+B9 - Coast Stop - RL2
+
+A1 - Signal 0V
+A2 - Speed Setpoint #1 
+A3(AI2) - Speed Setpoint #2/Current Demand
+B4_A4_B3_A6 - Setpoint Ramp Input(A4 - Speed setpoint no.3 (ramped)) - control by NOT RL60 - from pulpit manual mode?
+A5 - it's the same as AI4 speed setpoint from Maras contoleed by RL60(Maras) AND NOT RL63
+A8 - Total speed setpoint (analog output - the setpoint for Mill Screwdown2 Left Hand)
+B5 - Zero Speed - RL20
+B6 - Drive Healthy - RL19 (should be send to PLCsend to PLC)
+B7 - Drive Ready
+
+D5_D6 - External Contactor - RL17
+
+
+///////////////////////////////////
+
+Mill Screwdown2 (Left Hand) Drive
+Eurotherm 590P-0380 - manual isn't found
+The logic isn't clear, it can has speedsetpoint linke from previous converter (where it could be Maras or from Pulpit) or direct from Pulpit, that's why is possible when two converters have the different setpoint first from Maras, second from Pulpit?
+
+C9 - 24V for digital inputs
+C3 - Start - RL12(time delay) AND NOR RL13(time delay)
+C5 - Enable - CON10 AND RL57
+C8 - Current Demand Isolate - RL1 OR TRUE - allways true?
+C8 = OFF - AI2(A3) - Speed Setpoint #2
+C8 = ON - AI2(A3) - Current Demand
+B8 - Program Stop - RL1
+B9 - Coast Stop - RL2
+
+A1 - Signal 0V
+A3(AI2) - Speed Setpoint #2/Current Demand - from Mill Screwdown1 (Right Hand) Drive - his analog output
+B4_A4_B3_A6 - Setpoint Ramp Input(A4 - Speed setpoint no.3 (ramped)) - from Meal Pulpit, potentiometer?
+B5 - Zero Speed
+B6 - Drive Healthy - RL22 (should be send to PLCsend to PLC)
+B7 - Drive Ready - RL21
+
+D5_D6 - External Contactor - RL18
+
+
+///////////////////////////////////
+
+Edger Screwdown1 (Right Hand) Drive
+Eurotherm 570-1280 - manual isn't found
+The source of the speed setpoint isn't clear, the logic of controll of RL54 also isn't clear. What we can define exactly we have two speedsetpoint)
+
+C9 - 24V for digital inputs
+C3 - Start - RL23(time delay)
+C4 - Jog Mode - NOT RL33
+C5 - Enable - RL34 OR NOT RL33
+C6 - Symmetrical current clamps/Asymetrical (bipolar) current clamps (ON = bipolar) - allways true?
+C6 = ON - AI4(A5) - negative current clamp and (AI5)A6 - positive current clamp
+C6 = OFF - AI5(A6) - Main current limit and AI4(A5) - speed setpoint #4
+C8 - Current Demand Isolate - allways true?
+C8 = OFF - AI2(A3) - Speed Setpoint #2
+C8 = ON - AI2(A3) - Current Demand
+B8 - Program Stop - RL1
+B9 - Coast Stop - RL2
+
+A1 - Signal 0V
+A2 - Speed Setpoint #1 - control by RL54 - 
+A3(AI2) - Speed Setpoint #2/Current Demand
+B4_A4_B3_A6 - Setpoint Ramp Input(A4 - Speed setpoint no.3 (ramped)) - control by NOT RL54 from Meal Pulpit, potentiometer?
+A8 - Total speed setpoint
+B5 - Zero Speed - RL33
+B6 - Drive Healthy - RL32 (should be send to PLCsend to PLC)
+
+D5_D6 - External Contactor - RL30
+
+
+///////////////////////////////////
+
+Edger Screwdown2 (Left Hand) Drive
+Eurotherm 570-1280 - manual isn't found
+Isn't clear why on the terminal C6 and C8 we have the RL1 - Emergency Stop? The second converter hasn'r any Jog mode, but the first has...
+
+C9 - 24V for digital inputs
+C3 - Start - from the Edger Screwdown1 (Right Hand)
+C5 - Enable - from the Edger Screwdown1 (Right Hand) - Drive Ready
+C6 - Symmetrical current clamps/Asymetrical (bipolar) current clamps (ON = bipolar) - RL1
+C6 = ON - AI4(A5) - negative current clamp and (AI5)A6 - positive current clamp
+C6 = OFF - AI5(A6) - Main current limit and AI4(A5) - speed setpoint #4
+C8 - Current Demand Isolate - RL1?
+C8 = OFF - AI2(A3) - Speed Setpoint #2
+C8 = ON - AI2(A3) - Current Demand
+B8 - Program Stop - RL1
+B9 - Coast Stop - RL2
+
+A1 - Signal 0V
+A3(AI2) - Speed Setpoint #2/Current Demand - fron the EdgerScrewdown1 (Right Hand)
+A8 - Total speed setpoint
+B6 - Drive Healthy - RL32 (should be send to PLCsend to PLC)
+B7 - Drive Ready - RL34
+
+D5_D6 - External Contactor - RL31
+
+
+///////////////////////////////////
+
+Turntable (Right Hand) Drive
+Eurotherm 572-1280 - manual isn't found
+
+C9 - 24V for digital inputs
+C3 - Start - RL43 (time delay)
+C5 - Enable - NOT RL49 OR RL45
+C4 - Jog Mode - NOT RL49
+B8 - Program Stop - RL1
+B9 - Coast Stop - RL2
+
+A1 - Signal 0V
+A2(AI1) - Speed Setpoint #1 - Auto from Mill Control, control by RL44
+B4_A4_B3_A6 - Setpoint Ramp Input(A4 - Speed setpoint no.3 (ramped)) - control by NOT RL44 from Meal Pulpit, potentiometer manual mode?
+B6 - Drive Healthy - RL48 (should be send to PLCsend to PLC)
+B5 - Zero Speed - RL49
+
+D5_D6 - External Contactor - RL46
+
+
+///////////////////////////////////
+
+Turntable (Left Hand) Drive
+Eurotherm 572-1280 - manual isn't found
+
+C9 - 24V for digital inputs
+C3 - Start - from Turntable (Right Hand)
+C5 - Enable - NOT RL51 OR RL45
+C4 - Jog Mode - NOT RL51
+B8 - Program Stop - RL1
+B9 - Coast Stop - RL2
+
+A1 - Signal 0V
+A2(AI1) - Speed Setpoint #1 - Auto from Mill Control, control by RL44
+B4_A4_B3_A6 - Setpoint Ramp Input(A4 - Speed setpoint no.3 (ramped)) - control by NOT RL44 from Meal Pulpit, potentiometer manual mode?
+B6 - Drive Healthy - RL50 (should be send to PLCsend to PLC)
+B5 - Zero Speed - RL51
+
+D5_D6 - External Contactor - RL47

@@ -17,7 +17,7 @@
 1. We haven't output to build signal for "Power Supply Panel D" - D, p.1
 2. Missed R3/SDC/1 to build RL3. Also should the switches replaced by HMI? D, p.2
 3. Missed R3/TC/1 to build RL4. Also should the switches replaced by HMI? D, p.2
-4. Switch CS2 the part of switch we have on the pulpit, another part not. D, p.2 - Pulpit, p.7 - Galich! 
+4. Switch CS2 the part of switch we have on the pulpit, another part not. D, p.2 - Pulpit, p.7 - Galich! - take inversion from another contact
 5. The same question about door switches, do we need them? - D, p.3
 6. The logic of building RL55 input signal RL8 isn't found! - D, p.4.
 7. RL7 and others, everywhere where is MARAS, it's another separate System? We need any input for it's logic? D, p.5, D, p.7
@@ -25,27 +25,27 @@
 9. For speedsetpoint can we use HMI?
 10. RL54 - Auto Relay how to build it? D, p.10.
 11. TMC and MC Mode - difference.
-12.  RL1 in building of RL43 input signal isn't found. D, p.14 - Galich!
+12.  RL1 in building of RL43 input signal isn't found. D, p.14 - Galich! - I10.0
 
 ////////////// C ///////////////////////
 1. The switches should be implemented via HMI? Without them some Relays haven't any purpose. CS6, CS7 - C, p.2
 2. Lamp should be implemented via HMI? C, p,2
-3. Many signals from building the logic Rl6 and RL7 aren't found. C, p.2, but MC2 and MC1 - Millpulpit, p.9 - Galich
+3. Many signals from building the logic RL6 and RL7 aren't found. C, p.2, but MC2 and MC1 - Millpulpit, p.9 - Galich - open point! - analog control via -10 ... +10
 4. The output signal 1T ...  RL7A ... 111T - C, p.2
 5. Internal EmergencyStop in building of RL9, 52NI_ILGNER_SET_CB C , p.3
 6. MBRG isgnal is absent in logic of RL10 - C , p.3
 7. The output contach of RL10A aren't found and data excahnge between Mill Motor and Generator and PLC - C ,p.4
-8. Pulpit Emergency Stop - Galich! - C , p.5 many relays are absent. CS5 implemented over HMI? Door switches we allways.
+8. Pulpit Emergency Stop - Galich! - C , p.5 many relays are absent. CS5 implemented over HMI? Door switches we allways. - galich will add in future afyer discussing!
 9. The Mill overspeed signal we haven't, but Edger overspeed we have. C, p.6
 10. Do we need speed setpoint via joystick? May be we should use HMI? For another mechanismus we have the joystick, but in new shema any. C, p.9 - IW1100 - Galich
 11. Power circuit breaker for Mill and Edger, have we got them? C, p.11
 12. Input or Output for the Tachogenerator? C, p.18 - QW1020.
-13. Any input signal for the logic of RL34 - EBRG and PB2? C, p.20 - Galich?
+13. Any input signal for the logic of RL34 - EBRG and PB2? C, p.20 - Galich, discussed with customer?
 14. Any output signals for RL34 and dataexchange between converters and MES-PLC. C, p.21
 15. Edger overspeed we have this signal for Edger, but haven't for the Mill. C, p.22
 16. In logic of RL82 we haven't K/S and EMBR. C, p.22
 17. RL76 we haven't any reset button. C, p.22
-18. RL50 CS1is absent, replace via HMI? C, p.32 To pay attnetion to Shear pullpit, p.2 - Galich!
+18. RL50 CS1is absent, replace via HMI? C, p.32 To pay attnetion to Shear pullpit, p.2 - Galich! - not clear
 19. Also for RL50 - LTAC O/P/S, page 5. 52NI - from p.361 (big circuit)
 20. RL50A output signals and data excahnge between converters and MES PLC - C, p.33
 21. The reason of all Stall should be clarified! C, p.34 - reset button.
