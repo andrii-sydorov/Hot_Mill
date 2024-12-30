@@ -38,14 +38,14 @@ RL5 = I17.3
 RL6 and RL6A - Forward Relay
 RL6 = RL8 AND CSPF AND LIMIT1 AND MC2 AND XMBR AND NOT R19 AND NOT RL7
 Internal - RL7, RL8
-External - CSPF, LIMIT1, MC2, XMBR, R19 - everything isn't found!
+External - CSPF, LIMIT1, MC2(take from IW1100 more or less), XMBR, R19 - everything isn't found!
 Q12.1 = RL6
 Q2.0 = RL6
 
 RL7 and RL7A - Reverse Relay
 RL7 = RL8 AND CSPF AND LIMIT1 AND MC1 AND EMBR AND NOT R20 AND NOT RL6
 Internal - RL8, RL6
-External - CSPF, LIMIT1, MC1, EMBR, R20 - everything aren't found! 
+External - CSPF, LIMIT1, MC1(take from IW1100 more or less), EMBR, R20 - everything aren't found! 
 Q12.2 = RL7
 Q2.1 = RL7
 

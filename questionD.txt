@@ -15,6 +15,5 @@ D, p.1 - P, p.16
 14. But this terminal 275 are getting from Analog output converter - and control the release valve (for this we have digital output!) D, p.12
 15. We in previous converter logic of main contactor control and sending data to PLC (RL35) - added by Casani in DRA.
 16. We must clarified the TMC Mode and MC Mode, and sending data to PLC D, p. 14
-17. RL1 from 412 isn't found. D, p.15
-18. Like in previous converter the control of contactor and sending data to plc. That's is not clear the wrong naming or Relay. D, p17 and C, p.16... added by Casani in DRA.
-19. Isn't found I13.1, but we have it in new shema.
+17. Like in previous converter the control of contactor and sending data to plc. That's is not clear the wrong naming or Relay. D, p17 and C, p.16... added by Casani in DRA.
+18. Isn't found I13.1, but we have it in new shema.

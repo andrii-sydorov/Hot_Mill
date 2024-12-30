@@ -23,7 +23,7 @@ Q11.0 = RL3
 RL4 - Edger Screwdowns Control Available
 RL4 = RL1 AND ((RL32 AND RL35) OR (NOT RL30 AND NOT RL31)) AND ((RL4 AND EdgerScrewDownControl_ON_N) OR (CS2_OFF AND EdgerScrewDownControl_ON))
 Internal - RL1, RL32, RL35, RL30, RL31, RL4
-External - CS2_OFF(should be clarified with customer), EdgerScrewDownControl(should be clarified with customer)
+External - CS2_OFF(taking inverse contact = NOT I14.3), EdgerScrewDownControl(should be clarified with customer)
 The connection of RL4 after removing switches is unclear.
 Q11.2 = RL4
 
@@ -363,7 +363,8 @@ MC Mode and TMC Mode should be discussed!
 RL43 - Drives ON
 RL43 = RL5 AND RL1 AND ((NOT RL36 AND NOT RL42) OR RL43)
 Internal - RL5, RL36, RL42, RL43
-External - RL1 - isn't found
+External - RL1(I10.0)
+RL43 = RL5 AND I10.0 AND ((NOT RL36 AND NOT RL42) OR RL43)
 Q10.7 = RL43
 
 RL44 - Auto Ref Relay Turn Table

@@ -1,11 +1,11 @@
 1. The elements CS6 on the page C, p.2 isn't found! Without that eleemtn RL1 and RL2 haven't any purpose!
 2. The output for lamps aren't found! C, p.2
-3. May be Yelloe_Reverse is Q0.0. MD01, p.65
+3. May be Yellow_Reverse is Q0.0. MD01, p.65
 4. The elements for building signals RL6 and RL7 aren't found!
 5. The output contacts 1T ... 111T - RL7A isn't found!
 6. Internal Emergency Stop for building RL9 isn't found - C, p.3
 7. MBRG for building RL10 isn't found! But shouls be - C, p.3.
-8. Ilgner Set Cb isn;t found, what is it? C, p.3
+8. Ilgner Set Cb isn't found, what is it? C, p.3
 9. The logic of braker should be clarified! Solenoid and Voltage coil - what is is? C, p.3
 10. The output signals for RL10A aren't found! C, p.4
 11. Signals to PLC should be clarified - in anycase we shouls send some signals connected with drives, but what exactly?
