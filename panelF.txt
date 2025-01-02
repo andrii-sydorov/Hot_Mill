@@ -33,7 +33,8 @@ Q10.1 = RL6
 RL40 - temp Relay
 RL40 = true (may be some electrical issue)
 PLC circuit should be true - Panel F-Supply, but should be deleted why? 
-added in new Casani sheme (DRM04), but the input address isn't clear! 
+added in new Casani sheme (DRM04), but the input address isn't clear and is supposed below! 
+DRM04.A101.DO0 = RL40
 
 RL7 - Start Breast Roll1
 RL7 - RL6 AND RL1
@@ -59,6 +60,7 @@ RL8 = RL32 AND RL23C
 RL39 - temp Relay
 RL39 = NOT XTPUR AND V1MOR
 External - XTPUR, V1MOR - not found in drawings - added in new Casani sheme - DRA
+RL39 = DRA.
 
 RL11 - Control Available Breast Roll2
 RL11 = RL2 AND (RL4 AND NOT RL14) AND (ON OR (RL11 AND ON_N))
@@ -68,7 +70,8 @@ Q10.0 = RL11
 
 RL33 - Breast Roll2 Enable with Mill Exit
 RL33 = RL11/K AND NOT RL13/K
-External - RL11K, RL13K - F1 ... F71 - isn't found - added in new Casani sheme! - added in DRM04
+External - RL11K, RL13K - F1 ... F71 - isn't found - added in new Casani sheme! - added in DRM04.A106.DI1
+RL33 = DRM04.A106.DI2
 
 RL12 - Start Breast Roll2
 RL12 = RL11 AND RL1
@@ -78,7 +81,7 @@ RL12 = RL11 AND I10.1
 
 RL32 - Breast Roll1 Enable with Turntable Manual
 RL32 = RL36/D AND NOT RL44/D
-Internal - RL36/D, RL44/D (F1 ... F250)
+Internal - RL36/D, RL44/D (F1 ... F250) - internal signal
 RL32 = RL36/D AND NOT RL44/D
 
 CON2 - Breast Roll2 Contactor
@@ -105,7 +108,8 @@ RL9 is energized with converter and control the main contactor, may be the start
 How is known now we starts the converter with RL7, and RL2 and RL1 stopped it, RL8 - enable
 
 Q10.2 = RL9
-RL10 - Breast Roll1 Healthy, should be send to MES PLC (P, 16) - added in new Casani sheme DRM04.
+RL10 - Breast Roll1 Healthy
+DRM04.A101.DO3 = RL10
 
 RL9 - Control of the main contactor
 RL10 - Drive Healthy
@@ -122,7 +126,7 @@ RL14 is energized with converter and control the main contactor, may be the star
 How is known now we starts the converter with RL12, and RL2 and RL1 stopped it, RL13 - enable
 
 Q10.3 = RL14
-RL15 - Breast Roll2 Healthy, should be send to MES PLC (P, 16) - added by Casani in DRM04!
+RL15 - Breast Roll2 Healthy, should be send to MES PLC (P, 16) - added by Casani in DRM04 - is occupied!
 
 RL14 - Control of the main contactor
 RL15 - Drive Healthy
@@ -178,18 +182,14 @@ Converter Tiltpot
 
 A102.DO1 = RL25 AND RL20
 RL25 - Earth Fault from Earth fault Relay
-RL20 - Tilt Pot Health, should be send to MES PLC (P, 16) - added by Casani in DRM04
+RL20 - Tilt Pot Health
+DRM04.A102.DO2 = RL20
 We have the same input twice.... F150 - F154
 
 CON3 - Control of the main contactor
 RL20 - Drive Healthy
-
-////////////////////////////////////////////////////////////
-//////////////////// page 7 ////////////////////////////////
-////////////////////////////////////////////////////////////
-
 The output is deleted
-RL25 AND RL20 = DRM04.A102.Q01
+DRM04.A102.DO1 = RL25 AND RL20
 
 
 ////////////////////////////////////////////////////////////

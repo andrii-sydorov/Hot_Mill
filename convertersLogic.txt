@@ -34,7 +34,7 @@ A1 - Signal 0V
 A2 - Speed Setpoint #1 - from Mill Control (C544 - C, p.18) controlled by NOT RL33
 A3 - Speed Setpoint #2/Current Demand
 A8 - Total Setpoint
-B4_A4_B3_A6 - Setpoint Ramp Input(A4 - Speed setpoint no.3 (ramped)) - from Mill Exit Panel in manual mode - D, p.16 control by RL33 - some external AI
+B4_A4_B3_A6 - Setpoint Ramp Input(A4 - Speed setpoint no.3 (ramped)) - from Mill Exit Panel in manual mode - D, p.16 control by RL33 - some external AI - DRM04.A104.DI0
 B5 - Zero Speed - RL31
 B6 - Drive Healthy - RL15 (should be send to PLCsend to PLC)
 B7 - Drive Ready
@@ -57,7 +57,7 @@ A1 - Signal 0V
 A2 - Speed Setpoint #1 
 A3 - Speed Setpoint #2/Current Demand
 A8 - Total Setpoint
-B4_A4_B3_A6 - Setpoint Ramp Input(A4 - Speed setpoint no.3 (ramped)) - from H111 control by NOT RL17 - some external AI
+B4_A4_B3_A6 - Setpoint Ramp Input(A4 - Speed setpoint no.3 (ramped)) - from H111 control by NOT RL17 - some external AI - DRM04.A104.DI1
 by pressing Stop Button could be some speed setpoint, not clear what exactly.
 B5 - Zero Speed 
 B6 - Drive Healthy - RL20 (should be send to PLCsend to PLC)
