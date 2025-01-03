@@ -221,3 +221,123 @@ B6 - Drive Healthy - RL50 (should be send to PLCsend to PLC)
 B5 - Zero Speed - RL51
 
 D5_D6 - External Contactor - RL47
+
+
+//////////////// Mill ///////////////////////
+
+Mill Generators Fields Controller
+Eurotherm 590 Series Power Converter Type 590 FLC 150A
+
+C3 - Start = RL10(time delay)
+C5 - Enable - RL10 AND CON1
+C6 - Speed Control = RL21
+C7 - Both Generators = RL26
+
+D5 - D6 - 3 Phase Supply Slave = RL24 (output)
+B5 - Zero Speed = RL28 (output)
+B6 - Healthy = RL27 (output)
+
+
+Mill Motors Fields Controller
+Eurotherm 590 Series Power Converter Type 590 FLC 150A
+
+C3 - Start = RL10(time delay)
+C5 - Enable - RL21
+C6 - Economy - RL97
+
+D5 - D6 - 3 Phase Supply Slave = RL30 (output)
+B5 - Tacho OK = RL26 (output)
+B6 - Healthy = RL29 (output)
+
+
+//////////////// Edger ///////////////////////
+
+D12 - Contactor Coil (L)
+D11 - Contactor Coil (N)
+D10 - Auxiliary Supply (N)
+D9 - Auxiliary Supply (L)
+D8 - Field (-)
+D5 - Field (+)
+D4 - AC Field Supply
+D1 - AC Field Supply
+
+A1 - 0v (Signal)
+A2 - Armature Current Compensation
+A3 - Setpoint Ramp Reset
+A4 - Setpoint Ramp Input
+A5 - Setpoint Ramp Output
+A6 - Input no. 1
+A7 - Input no. 2
+A8 - Inverted Sub. Total
+A9 - Input no. 3
+A10 - Total Setpoint
+A11 - +10v Setpoint Reference
+A12 - -10v Setpoint Reference
+
+B1 - 0v (Signal)
+B2 - Tacho Input
+B3 - Current Demand Isolate
+B4 - Current Demand Output
+B5 - Auxiliary Current Input
+B6 - Select Auxiliary Input
+B7 - Auxiliary Current Limit (+)
+B8 - Main Current Limit
+B9 - +10v Reference
+B10 - Auxiliary Current Limit (-)
+B11 - Buffered Tacho
+B12 - Buffered Current
+
+C1 - 0v (Signal)
+C2 - Thermistor / Microtherm
+C3 - Auxiliary Enable
+C4 - Start Supply
+C5 - Enable
+C6 - Stop
+C7 - Start
+C8 - Ready
+C9 - Zero Speed Relay Drive
+C10 - Drive Operational Relay Drive
+C11 - +24v
+C12 - Fault Reset External
+
+Edger Generator Field Controller (Master)
+546 - 0270 - .....
+
+C7 - Start = RL34(delay)
+C5 - Enable = RL34
+C10 - Drive Operational Relay Drive
+RL51 = C10
+D11 D12 = CON6
+
+
+Edger Generator Field Controller (Slave)
+546 - 0270 - .....
+
+C7 - Start = RL34(delay)
+C5 - Enable = RL34
+C10 - Drive Operational Relay Drive
+RL39 = C10
+CON7 = D11 D12
+
+Edger Drive Speed And Current Loops
+546 - xxxx .....
+
+C7 - Start = RL36
+C10 - Drive Operational Relay Drive
+RL40 = C10
+C9 - Zero Speed Relay Drive
+RL41 = C9
+
+B1 B2 - Tachogenerator Input
+B6 - Select Auxiliary Input = RL95 OR NOT RL41
+B11 - Buffered Tacho (input)
+B12 - Buffered Current (input)
+
+
+Edger Motor Field Controller - not found!
+5401 - 020 - ..... - not found!
+
+Edger Motor Field Control Stack
+546 - 1000 - .....
+
+
