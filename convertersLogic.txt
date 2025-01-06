@@ -337,7 +337,50 @@ B12 - Buffered Current (input)
 Edger Motor Field Controller - not found!
 5401 - 020 - ..... - not found!
 
+
 Edger Motor Field Control Stack
 546 - 1000 - .....
+C3 - Auxilizry Enable = NOT RL36(time delay)
+not clear like C10.
+С5 - Enable - RL36
+C7 - Start - RL34
+D11 D12 - Contactor Coil = RL44
+B5 - Current Ref.(Aixiliary Current Input)
+B12 - Field Current (Buffered Current)
+A4 - Setpoint Ramp Input (two speed one throw 330K, another throw RL97 (short circuit))
 
 
+///////////////// Shear ////////////////////
+
+Shear Generator Field Controller (Master)
+546 - 0560 - .....
+C5 - Enable = RL50
+C7 - Start = RL50
+C10 - Drive Operational Relay = RL69
+D11 D12 - Contactor Coil = CON17
+B10 - Auxiliary Current Limit(-)
+A6 - Generator Flux Setpoint (Input no.1)
+A7 - Voltage Loop (Breaker Open) (Input no.2)
+A10 - Total Setpoint (to slave drive)
+
+
+Shear Generator Field Controller (Slave)
+546 - 0560 - .....
+C5 - Enable = RL50
+C7 - Start = RL50
+C10 - Drive Operational Relay = RL70
+D11 D12 - Contactor Coil = CON18
+B10 - Auxiliary Current Limit(-)
+A6 - Generator Flux Setpoint (Input no.1)
+
+Shear Drivr Speed And Current Loops (Slave)
+546 - 0350 - .....
+C5 - Enable = allways true
+C7 - Start = RL60
+C10 - Drive Operational Relay = RL71
+C9 - Zero Speed Relay Drive = RL72
+B2 - Voltage Feedback (choice between Motor 1 and Motor 2) (Tacho Input)
+B6 - Select Auxiliary Input = RL63 OR NOT RL72 - logic osn't clear - because is connected with 0V
+B12 - Shear Current (Buffered Current) - maybe output
+A4 - Shear Setpoint (Setpoint Ramp Input) - input from pulpit
+A2 - Generator Flux Setpoint (Armature Current Compensation) - it's setpoint to Shear Generator Field Controller (Master)
