@@ -1,0 +1,3 @@
+1. The data exchange between old drives(Mill, Edger, Shear) and old PLC-Systems, we couldn't simple bridged all siganls. Some signals from the new Drive-System should be send to old PLC-System, because it's must know about current situation of drives.
+2. MTS-PLC. It receives many signals from PT100, after replacement they go away, we must some how emulated them. Resistor, programm changing in old PLC?
+3. HGC-PLC. The replacement the the old drives - influence to high-speed counter.

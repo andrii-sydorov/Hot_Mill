@@ -606,8 +606,8 @@ RL70 - Shear at Top (closed between 10 - 360)
 RL70 = RS-3 
 External - RS-3 (I30.2)
 LampSD = RS-3
-Q30.1 = RS-3
-LocalLamp = RS-3
+Q30.1 = RL70
+LocalLamp = RL70
 
 RL52 - Shear Stall
 RL52 = RL67 OR (NOT SomeButton AND NOT Reset AND RL52)

@@ -17,7 +17,7 @@ RL5 - is energized with door switches
 
 RL1 - Estop
 RL1 = (NOT RL1(time delay) OR RL1) AND RL2/A AND NOT RL1/A AND NOT RL5
-Internal - RL2/A, RL1/A (F41 AND F42) = DRM04.A106.DI0 (DRM04, p.34)
+Internal - RL2/A, RL1/A (F41 AND F42) = DRM04.A105.DI0 (DRM04, p.34)
 External - RL1, RL5(door switches, haven't any, may be should be External signals)
 RL1 = (NOT RL1(time delay) OR RL1) AND DRM04.A106.DI0 AND NOT RL5
 
@@ -127,10 +127,13 @@ How is known now we starts the converter with RL12, and RL2 and RL1 stopped it, 
 
 Q10.3 = RL14
 RL15 - Breast Roll2 Healthy, should be send to MES PLC (P, 16) - added by Casani in DRM04 - is occupied!
+DRM04.A102.DO1 = RL15
 
 RL14 - Control of the main contactor
 RL15 - Drive Healthy
 RL31 - Zero Speed
+
+Converter_setpoint = DRM04.A104.AI0
 
 ////////////////////////////////////////////////////////////
 //////////////////// page 6 ////////////////////////////////
@@ -189,7 +192,9 @@ We have the same input twice.... F150 - F154
 CON3 - Control of the main contactor
 RL20 - Drive Healthy
 The output is deleted
-DRM04.A102.DO1 = RL25 AND RL20
+// DRM04.A102.DO1 = RL25 AND RL20
+DRM04.A102.DO2 = RL20
+Converter_setpoint = DRM04.A104.AI1
 
 
 ////////////////////////////////////////////////////////////
