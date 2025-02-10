@@ -1,10 +1,9 @@
 1. To build signal RL1(ESTOP) we need the RL5 - door switches but we haven't it.
-2. After deleting the switch (F, p.2) isn't clear the connection RL26 - should be discussed with customer.
+2. After deleting the switch (F, p.2) isn't clear the connection RL6 - should be discussed with customer.
 3. The power supply of the convertes of Breast Roll is controlled by it's own (RL9 - CON1, RL14 - CON2). Logic the energizing the relay isn't clear.
-4. The signals that energized RL39 (F, p.3) aren't found - added in new Casani sheme - DRA
 5. After deleting the switch (F, p.3) isn't clear the connection RL11 - should be discussed with customer.
-6. The signals that energized RL13 (F, p.3)  (F68 ... F62) aren't found.
-7. The using the contancts of RL13 (F, p.3)  aren't found.
-8. The meaning the contacts on converter. RL15 (F, p.5)- Breast Roll2 Healthy, should be send to MES PLC (P, 16) - now is occupied by another signal.
-9. We have the same signals twice F150 - F154 (Galich), 150 - 154 (Casani)... Which should we use?
-10. In scheme of Casani he used DRM04.A109.DI1 and DRM04.A109.DI2  (p.36) but in old sheme this contsct aren't responding (F, p.6)
+
+Noticed to Casani sheme:
+1. DRM04.A106.DI3 is the same as DRM04.A110.DI2, they could be Spared.
+2. RL26 should be DO, but we have DI.
+3. Don't forget about F, p.8 and this two DO.

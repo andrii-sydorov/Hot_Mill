@@ -17,7 +17,7 @@ RL5 - is energized with door switches
 
 RL1 - Estop
 RL1 = (NOT RL1(time delay) OR RL1) AND RL2/A AND NOT RL1/A AND NOT RL5
-Internal - RL2/A, RL1/A (F41 AND F42) = DRM04.A105.DI0 (DRM04, p.34)
+Internal - RL2/A, RL1/A (F41 AND F42) = DRM04.A106.DI0 (DRM04_Rev01, p.10)
 External - RL1, RL5(door switches, haven't any, may be should be External signals)
 RL1 = (NOT RL1(time delay) OR RL1) AND DRM04.A106.DI0 AND NOT RL5
 
@@ -34,7 +34,7 @@ RL40 - temp Relay
 RL40 = true (may be some electrical issue)
 PLC circuit should be true - Panel F-Supply, but should be deleted why? 
 added in new Casani sheme (DRM04), but the input address isn't clear and is supposed below! 
-DRM04.A101.DO0 = RL40
+DRM04_Rev01.A101.DO0 = RL40
 
 RL7 - Start Breast Roll1
 RL7 - RL6 AND RL1
@@ -59,8 +59,8 @@ RL8 = RL32 AND RL23C
 
 RL39 - temp Relay
 RL39 = NOT XTPUR AND V1MOR
-External - XTPUR, V1MOR - not found in drawings - added in new Casani sheme - DRA
-RL39 = DRA.
+External - XTPUR, V1MOR
+RL39 = DRM04_Rev01.A110.DI0
 
 RL11 - Control Available Breast Roll2
 RL11 = RL2 AND (RL4 AND NOT RL14) AND (ON OR (RL11 AND ON_N))
@@ -70,8 +70,8 @@ Q10.0 = RL11
 
 RL33 - Breast Roll2 Enable with Mill Exit
 RL33 = RL11/K AND NOT RL13/K
-External - RL11K, RL13K - F1 ... F71 - isn't found - added in new Casani sheme! - added in DRM04.A106.DI1
-RL33 = DRM04.A106.DI2
+External - RL11K, RL13K - F1 ... F71
+RL33 = DRM04_Rev01.A106.DI2
 
 RL12 - Start Breast Roll2
 RL12 = RL11 AND RL1
@@ -92,10 +92,11 @@ CON2 is used for Supplying the old convreter, in our shematic wasn't found. may 
 RL13 - Enable Breast Roll2
 RL13 = (RL33 OR RL23/C) AND RL39 AND RL12 AND (RV2-1 OR L4.K034)
 Internal - RL33, RL39, RL12, RL23/C (internal logik)
-External - RV2-1, L4.K034 (F68 ... F62) - are not found
-RL13 = (RL33 OR RL23/C) AND RL39 AND RL12 AND (RV2-1 OR L4.K034)
+External - RV2-1(DRM04_Rev_01.A111.DI0), L4.K034(DRM04_Rev01.A111.DI1) (F68 ... F62) - are not found
+RL13 = (RL33 OR RL23/C) AND RL39 AND RL12 AND (DRM04_Rev_01.A111.DI0 OR DRM04_Rev01.A111.DI1)
 
-Contacts of RL13 are used in purple area should be checked!
+DRM04_Rev01.A101.DO2 = RL13
+DRM04_Rev01.A101.DO3 = RL13
 
 
 ////////////////////////////////////////////////////////////
@@ -109,7 +110,7 @@ How is known now we starts the converter with RL7, and RL2 and RL1 stopped it, R
 
 Q10.2 = RL9
 RL10 - Breast Roll1 Healthy
-DRM04.A101.DO3 = RL10
+DRM04_Rev01.A101.DO3 = RL10
 
 RL9 - Control of the main contactor
 RL10 - Drive Healthy
@@ -127,13 +128,13 @@ How is known now we starts the converter with RL12, and RL2 and RL1 stopped it, 
 
 Q10.3 = RL14
 RL15 - Breast Roll2 Healthy, should be send to MES PLC (P, 16) - added by Casani in DRM04 - is occupied!
-DRM04.A102.DO1 = RL15
+DRM04_Rev01.A102.DO1 = RL15
 
 RL14 - Control of the main contactor
 RL15 - Drive Healthy
 RL31 - Zero Speed
 
-Converter_setpoint = DRM04.A104.AI0
+Converter_setpoint = DRM04_Rev01.A104.AI0
 
 ////////////////////////////////////////////////////////////
 //////////////////// page 6 ////////////////////////////////
@@ -142,29 +143,29 @@ Converter_setpoint = DRM04.A104.AI0
 RL16 - Control Available Tilt Pot
 RL16 = RL6/H
 External - RL6/H (F1 ... F141) - DRM04.A107.DI0
-RL16 = A107.DI0
+RL16 = DRM04_Rev01.A107.DI0
 Q10.4 = RL16
 
 RL19 - temp Realay
 RL19 = RL12/H AND RL26 AND RL16
 Internal - RL26, RL16
-External - RL12/H (F1 ... F142) - DRM04.A107.DI1
-RL19 = DRM04.A107.DI1 AND RL26 AND RL16
+External - RL12/H (F1 ... F142) - DRM04_Rev01.A107.DI1
+RL19 = DRM04_Rev01.A107.DI1 AND RL26 AND RL16
 
 RL17 - Auto
-RL17 = DRM04.A107.DI2
+RL17 = DRM04_Rev01.A107.DI2
 
 RL18 - Enable
 RL18 = RL15/H
-External - RL15/H (F1 ... F146) - DRM04.A107.DI3
-RL18 = DRM04.A107.DI3
+External - RL15/H (F1 ... F146) - DRM04_Rev01.A107.DI3
+RL18 = DRM04_Rev01.A107.DI3
 
 RL26 - Tilt Pot Interlock
 RL26 = ((LS-A AND RL16) OR RL26) AND NOT RL22
 Internal - RL16, RL26, RL22
-External - LS-A (F1 ... F147) - DRM04.A108.DI0
-RL26 = ((DRM04.A108.DI0 AND RL16) OR RL26) AND NOT RL22
-DRM04.A102.DO0 = RL26
+External - LS-A (F1 ... F147) - DRM04_Rev01.A108.DI0
+RL26 = ((DRM04_Rev01.A108.DI0 AND RL16) OR RL26) AND NOT RL22
+DRM04.A102.DO0 = RL26 - we don't have it
 
 RL21 - Ingot Raise
 RL21 = NOT RL28(time delay) AND ((I10.2 AND RL21) OR I10.3) AND NOT RL22
@@ -183,18 +184,14 @@ Internal - RL22
 
 Converter Tiltpot
 
-A102.DO1 = RL25 AND RL20
 RL25 - Earth Fault from Earth fault Relay
 RL20 - Tilt Pot Health
-DRM04.A102.DO2 = RL20
-We have the same input twice.... F150 - F154
+DRM04_Rev01.A102.DO2 = RL20
 
 CON3 - Control of the main contactor
 RL20 - Drive Healthy
-The output is deleted
-// DRM04.A102.DO1 = RL25 AND RL20
-DRM04.A102.DO2 = RL20
-Converter_setpoint = DRM04.A104.AI1
+DRM04_Rev01.A102.DO0 = RL25 AND RL20
+Converter_setpoint = DRM04_Rev01.A104.AI1
 
 
 ////////////////////////////////////////////////////////////
