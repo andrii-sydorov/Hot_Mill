@@ -5,5 +5,5 @@
 
 Noticed to Casani sheme:
 1. DRM04.A106.DI3 is the same as DRM04.A110.DI2, they could be Spared.
-2. RL26 should be DO, but we have DI.
+2. RL26 should be DO, but we have DI. 
 3. Don't forget about F, p.8 and this two DO.

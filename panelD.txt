@@ -5,7 +5,7 @@
 RL65 - power supply dc Ok
 RL66 - input AC ok
 
-RL65 AND RL66 - Panel D-supply OK - lose!!!
+RL65 AND RL66 = DRA_Rev01.A104.DO2
 
 //////////////////////////////////////////////////////
 ////////////////// page 2 ////////////////////////////
@@ -14,9 +14,9 @@ RL65 AND RL66 - Panel D-supply OK - lose!!!
 RL3 - Mill Screwdowns Control Available
 RL3 = RL1 AND ((RL19 AND RL22) OR (NOT RL17 AND NOT RL18)) AND (Reset OR MillScrewDownControl_ON OR (RL3 AND R3/SDC/1 AND MillScrewDownControl_ON_N)
 Internal - RL1, RL19, RL22, RL17, RL18, RL3
-External - Reset(unfound), R3/SDC/1(unfound), MillScrewDownControl(should be clarified with customer)
-DRA.A101.DO2 = RL3
-DRA.A101.DO3 = RL3
+External - Reset(unfound), R3/SDC/1(DRA_Rev01.A113.DI2), MillScrewDownControl(should be clarified with customer)
+DRA_Rev01.A101.DO3 = RL3
+DRA_Rev01.A101.DO2 = RL3
 The connection of RL3 after removing switches is unclear.
 Q11.0 = RL3
 
@@ -30,16 +30,16 @@ Q11.2 = RL4
 RL5 - Turntable Control Available
 RL5 = RL1 AND ((RL48 AND RL50) OR (NOT RL46 AND NOT RL47)) AND ((CS2_OFF AND TurntableControl_ON) OR (RL5 AND R3/TC/1 AND TurntableControl_ON_N))
 Internal - RL1, RL48, RL50, RL46, RL47, RL5
-External - CS2(unfound and not deleted), R3/TC/1(unfound and not deleted), TurntableCOntrol(unfound and not deleted)
-DRA.A101.DO0 = RL5
-DRA.A101.DO1 = RL5
+External - CS2(unfound and not deleted), R3/TC/1(DRA_Rev01.A113.DI3), TurntableCOntrol(unfound and not deleted)
+DRA_Rev01.A101.DO0 = RL5
+DRA_Rev01.A101.DO1 = RL5
 Q10.6 = RL5
 
 RL1 - Emergency Stop Relay
 RL1 = (NOT RL1(time delay) OR RL1) AND NOT MillEmergencyStopInPulpit AND NOT RL6
 Internal - RL1, RL6
-External - MillEmergencyStopInPulpit (DRA.A111.DI0)
-RL1 = (NOT RL1(time delay) OR RL1) AND NOT DRA.A111.DI0 AND NOT RL6
+External - MillEmergencyStopInPulpit (DRA_Rev01.A114.DI2)
+RL1 = (NOT RL1(time delay) OR RL1) AND NOT DRA_Rev01.A114.DI2 AND NOT RL6
 
 RL2 - Delayed Emergency Stop
 RL2 = RL1(time delay)
@@ -85,9 +85,11 @@ Internal - RL12, RL20
 //////////////////////////////////////////////////////
 
 RL7 - Drives Start
-RL7 = RL63 OR (NOT RL60 AND I12.0)
-External - RL63(Maras Drive Enable, not found), RL60(not found)
+RL7 = (RL63 OR (NOT RL60 AND I12.0)) AND RL3
+External - RL63(Maras Drive Enable, DRA_Rev01.A111.DI2), RL60(DRA_Rev01.A111.DI0)
+Internal - RL3
 RL60 and RL63 theoretical are taken from D, p.7 - but should be clarified
+RL7 = (DRA_Rev01.A111.DI2 OR (NOT DRA_Rev01.A111.DI0 AND I12.0)) AND RL3
 
 RL8 - High
 RL8 = (RL16 AND Down_3) OR (UP_3)
@@ -128,29 +130,29 @@ Q11.1 = RL12
 RL13 - Start Right Hand Only
 RL13 = CS_Drive OR RL13 OR (RL60 (Maras_ON) AND RL64(OFF)) AND RL7
 Internal - RL13, RL7
-External - CS2_Drive - I13.0
-RL13 = I13.0 OR RL13 OR (RL60 (Maras_ON) AND RL64(OFF)) AND RL7
+External - CS2_Drive - I13.0, RL60 (Maras_ON) - DRA_Rev01.A111.DI0, RL64(OFF) - DRA_Rev01.A111.DI3
+RL13 = I13.0 OR RL13 OR (DRA_Rev01.A111.DI0 AND DRA_Rev01.A111.DI3) AND RL7
 
 RL58 - De-Energized Clutch
 RL58 = CS_Drive OR RL13 OR (RL60 (Maras_ON) AND RL64(OFF))
 Internal - RL13
-External - CS2_Drive - I13.0
-RL58 = I13.0 OR RL13 OR (RL60 (Maras_ON) AND RL64(OFF))
+External - CS2_Drive - I13.0, RL60 - DRA_Rev01.A111.DI0, RL64 - DRA_Rev01.A111.DI3
+RL58 = I13.0 OR RL13 OR (DRA_Rev01.A111.DI0 AND DRA_Rev01.A111.DI3)
 
 RL14 - Up Limit Reached
 RL14 = NOT LSA AND NOT LSA-1
-External - LSA, LSA-1 - DRA.A108.DI0
-RL14 = NOT DRA.A108.DI0
+External - LSA, LSA-1 - DRA_Rev01.A112.DI2
+RL14 = NOT DRA_Rev01.A112.DI2
 
 RL15 - Down Limit Reached
 RL15 = NOT LSB
-External - LSB - DRA.A108.DI1
-RL15 = DRA.A108.DI1
+External - LSB - DRA_Rev01.A112.DI0
+RL15 = NOT DRA_Rev01.A112.DI0
 
 RL16 - Slowdown Limit
 RL16 = NOT LSC
-External - LSC - DRA.A108.DI2
-RL16 = DRA.A108.DI2
+External - LSC - DRA_Rev01.A112.DI1
+RL16 = NOT DRA_Rev01.A112.DI1
 
 CON1 - Right Mill Screwdown Contactor
 CON1 = RL17
@@ -165,6 +167,16 @@ Internal - RL18
 //////////////////////////////////////////////////////
 
 The MARAS and Eurotherm data excahnge is unclear!
+RL60(Maras Enable) = DRA_Rev01.A111.DI0
+RL61(Call Mode) = DRA_Rev01.A111.DI1
+RL63(Drive Enable) = DRA_Rev01.A111.DI2
+RL64(Clutch) = DRA_Rev01.A111.DI3
+
+DRA_Rev01.A105.DO0 = RL14
+DRA_Rev01.A105.DO1 = RL15
+DRA_Rev01.A105.DO2 = RL16
+DRA_Rev01.A105.DO3 = RL3
+DRA_Rev01.A106.DO0 = RL1
 
 
 //////////////////////////////////////////////////////
@@ -180,7 +192,9 @@ RL20 - Zero Speed
 RL19 - Drive Healthy
 RL17 - Control the main contactor
 
-RL19 - Breast Roll1 Healthy, should be send to MES PLC (P, 16) -added by Casani DRA
+RL19 - Breast Roll1 Healthy
+DRA_Rev01.A102.DO0 = RL19
+Speed_setpoint = DRA_Rev01.A109.AI0 (RL60(MARAS Enable AND NOT RL63(Drive Enable)))
 
 
 //////////////////////////////////////////////////////
@@ -196,7 +210,10 @@ RL22 - Drive Healthy
 RL21 - Drive Ready
 RL18 - Control the main contactor
 
-RL22 - Breast Roll1 Healthy, should be send to MES PLC (P, 16) - added by Casani DRA
+Speed control goes from first converter
+
+RL22 - Breast Roll1 Healthy
+DRA_Rev01.A102.DO1 = RL22
 
 
 //////////////////////////////////////////////////////
@@ -244,20 +261,20 @@ Internal - RL27
 
 HydraulicReleaseValve = RL53
 Internal - RL53
-DRA.A102.DO0 = HydraulicReleasevalve
+DRA_Rev01.A103.DO0 = HydraulicReleasevalve
 
 RL54 - Auto
 Not found!!!
 
 RL28 - Out Limit Reached
 RL28 = NOT LSA AND NOT L/S AND NOT L/S AND NOT L/S
-External - LAS, L/S - DRA.A108.DI3
-RL28 = NOT DRA.A108.DI3
+External - LAS, L/S - DRA_Rev01.A113.DI0
+RL28 = NOT DRA_Rev01.A113.DI0
 
 RL29 - In Limit Reached
 RL29 = NOT LSB AND NOT L/S
-External - LSB, L/S - DRA.A109.DI0
-RL29 = NOT DRA.A109.DI0
+External - LSB, L/S - DRA_Rev01.A113.DI1
+RL29 = NOT DRA_Rev01.A113.DI1
 
 CON3 - Edger Screwdown1 Contactor
 CON3 = RL30
@@ -289,8 +306,10 @@ RL33 - Zero Speed
 RL32 - Drive Healthy
 RL30 - Control the main contactor
 
-RL33 - Edger Screwdown RightHand, should be send to MES PLC (P, 16) - added by Casani in DRA
-But should be RL32 - Drive healthy like in previous converter
+RL33 - Edger Screwdown RightHand
+
+RL32 - Drive healthy like in previous converter
+DRA_Rev01.A102.DO2 = RL32
 
 
 //////////////////////////////////////////////////////
@@ -307,7 +326,8 @@ RL35 - Drive Healthy
 RL34 - Drive Ready
 RL31 - Control the main contactor
 
-RL35 - Edger Screwdown LeftHand, should be send to MES PLC (P, 16) - added by Casani in DRA
+RL35 - Edger Screwdown LeftHand
+DRA_Rev01.A102.DO3 = RL35
 
 
 //////////////////////////////////////////////////////
@@ -334,7 +354,7 @@ RL38 = RL5 AND (NOT RL42 AND (I14.0 OR I14.0)) OR (NOT RL36 AND (I16.2 OR I16.2)
 
 RL39 - Low Speed
 RL39 = RL5 AND (RL42 OR RL36) AND NOT RL38 AND NOT RL37
-External - RL5, RL42, RL36, RL38, RL37
+Internal - RL5, RL42, RL36, RL38, RL37
 
 RL40 - Forward Drive1
 RL40 = RL5 AND ((NOT RL42 AND Forward_3_2_1) OR (NOT RL36 AND Right_3_2_1))
@@ -353,8 +373,7 @@ RL42 = RL5 AND NOT RL36 AND (Left_3_2_1 OR Right_3_2_1)
 Internal - RL5, RL36
 External - Left_3_2_1, Right_3_2_1 - I16.0
 
-RL1 AND RL40 AND RL36 D410 - added by Casani in DRA.
-MC Mode and TMC Mode should be discussed!
+DRA_Rev01.A103.DO1 = RL1 AND RL40 AND RL36
 
 //////////////////////////////////////////////////////
 ////////////////// page 15 ///////////////////////////
@@ -409,7 +428,7 @@ RL49 - Zero Speed
 RL48 - Drive Healthy
 RL46 - Control the main contactor
 
-RL49(RL48 according shematic) - Edger Screwdown LeftHand, should be send to MES PLC (P, 16) - added by Casani in DRA
+DRA_Rev01.A103.DO3 = RL48
 
 
 //////////////////////////////////////////////////////
@@ -426,4 +445,4 @@ RL50 - Drive Healthy
 RL51 - Zero Speed
 RL47 - Control the main contactor
 
-RL51(RL50 according shematic) - Edger Screwdown LeftHand, should be send to MES PLC (P, 16) - added by Casani in DRA
+DRA_Rev01.A104.DO0 = RL50
