@@ -7,3 +7,12 @@ Noticed to Casani sheme:
 1. DRM04.A106.DI3 is the same as DRM04.A110.DI2, they could be Spared.
 2. RL26 should be DO, but we have DI. 
 3. Don't forget about F, p.8 and this two DO.
+
+toDmitrii
+1. Please update the commentar to Mapping
+2. To build Panel F-Supply we need sone feedback from power supply unit.
+3. Don't forget about converters and their Relay in main sheme. RL4, RL14, RL9
+4. Don't forget about tilt pot lamp to pulpit!
+5. Don't forget send data from coverters to old PLC RL10 and others!
+6. Don't forget about RL26, we have DI but should DO! Tilt Pot!
+7. Don't forget about RL25 and RL20, converters!

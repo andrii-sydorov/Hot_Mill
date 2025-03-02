@@ -1,6 +1,6 @@
 Remarks
 
-Panel C:
+Panel F:
 1. DRM04_Rev01.A106.DI1 it's our internal signal from panel C - could be Spared.
 2. DRM04_Rev01.A106.DI3 and DRM04_Rev01.A110.DI2 it's our internal signal from panel D (the same in both cases) - that's why they could be spared.
 3. DRM04_rev01.A108.DI1 it's out internal signal from panel C - could be Spared.
