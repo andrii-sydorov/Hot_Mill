@@ -1,0 +1,86 @@
+Panel F:
+
+Breast Roll 1 Entry:
+
+Input:
+Start - RL7
+Enable - RL8 AND NOT RL30
+Program Stop - RL1
+Coast Stop - RL2 (останов без торможения, останов в режиме выбега)
+Speed Setpoint:
+ - from Mill Control (Panel C) controlled by NOT RL32
+ - from Turntable - from Turntable (Panel D) controlled by RL32
+
+Output:
+Drive Helathy - RL10 (The drive is "healthy" (TRUE) if there is no Start command)
+Zero Speed - RL30 (default 2%)
+Control Contactor - RL9
+
+
+Breast Roll 2 Exit:
+
+Input:
+Start - RL12
+Enable - RL13 AND NOT RL31
+Program Stop - RL1
+Coast Stop - RL2
+Speed Setpoint:
+ - from Mill Control (Panel C) controlled by NOT RL33
+ - from Mill Exit Panel (Panel K) - DRA01.A91.A104.AI0 controlled by RL33 
+
+Output:
+Drive Helathy - RL15
+Zero Speed - RL31
+Control Contactor - RL14
+
+
+Tilt Pot:
+
+Input:
+Start - RL19 (time Delay)
+Enable - RL18
+Program Stop - RL1
+Coast Stop - RL2
+Speed Setpoint:
+ - from Edger Entry (Panel H) - DRA01.A91.A104.AI1 
+
+
+ Output:
+ Drive Helathy - RL20
+
+
+Remarks:
+
+1. Actualize according current EPLAN:
+DRA01.A90.A103.DO2
+DRA01.A90.A104.DO3
+DRA01.A90.A113.DI2
+DRA01.A90.A113.DI3
+DRA01.A90.A114.DI3
+
+DRA01.A91.A102.DO3
+DRA01.A91.A108.DI2
+DRA01.A91.A109.DI3
+DRA01.A91.A110.DI2 
+
+2. We need general rules for mapping!
+
+a)  // SPEED LIMIT SELECT 60 MPM. SPEED LIMIT 1
+    "IO_DB".Dig.IN.I34 := "I17_1";
+    //+MD11B01GRC-M101-12S. LUBE OIL. OIL FLOW  ND-END
+    "IO_DB".Dig.IN.I60 := "DRM01A3_A106_DI3";
+
+b)  According new EPLAN we have "DRA01A90_A114_DI3",butI107 is occupied!
+     //MILL EMERGENCY STOP
+    "IO_DB".Dig.IN.I106 := "DRA01A90_A114_DI2";
+
+    //############# =MD01E10+DRA01.A91 ##########
+
+    //ESTOP
+    "IO_DB".Dig.IN.I107 := "DRA01A91_A106_DI0";
+
+c)  // BREAST ROLL 1. CONTROL AVAILABLE
+    "Q10_1" := "DB_PanelF_BreastRolls".Drives.MCC.Out.RL6;
+
+    // BREAST ROLL 1. DRIVE OFF
+    "Q10_2" := "IO_DB".Dig.OUT.O15;

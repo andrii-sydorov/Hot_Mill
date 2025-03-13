@@ -1,15 +1,14 @@
 Remarks
 
 Panel F:
-1. DRM04_Rev01.A106.DI1 it's our internal signal from panel C - could be Spared.
-2. DRM04_Rev01.A106.DI3 and DRM04_Rev01.A110.DI2 it's our internal signal from panel D (the same in both cases) - that's why they could be spared.
-3. DRM04_rev01.A108.DI1 it's out internal signal from panel C - could be Spared.
-4. DRM04_Rev01.A108.DI2 - here we working with RL26, but RL26 should be digital output (F 6.5 and 7.4)
-5. DRM04_Rev01.A108.DI3 - this signal we are taking from Galich sheme, that's why could be spared.
-6. DRM04_Rev01.A109.DI3 and DRM04_Rev01.A110.DI2 - it's signal to start BreastRoll1 and BreastRoll2, but we are getting from one RL1 (panel P), that's why we need only one input. another could be spared.
-7. DRM04_Rev01.A111.DI0 and DRM04_Rev01.A111.DI1 - this two signals should have another commentar, the correct version it's above on terminal box (at the this page).
+1. DRA01.A91.A106.DI1 it's our internal signal from panel C - could be Spared - p.179
+2. DRA01.A91.A106.DI3 it's our internal signal from panel D - could be spared - p.179
+3. DRA01.A91.A108.DI1 it's out internal signal from panel C - could be Spared - p.180
+4. DRA01.A91.A108.DI2 - wrong commentar, should be Spared - p.180
+5. DRA01.A91.A108.DI3, DRA01.A91.A109.DI0, DRA01.A91.A109.DI1, DRA01.A91.A109.DI2 - this signal we are taking from Galich sheme, that's why could be spared and disconnected from terminal F - p.180 and p.181
+
+RL26 - DRA01.A91.A102.DO3 - some feedback to somewhere
+RL1 - DRA01.A91.A110.DI1 - start Breast Roll2 and also 1 - it goes from galich sheme - we don' need it.
 
 Panel D:
-1. DRA_Rev01.A103.DO2 - it's our internal signal, which we are sending to Panel F - that's why could be spared.
-2. DRA_Rev01.A104.DO3 - it's signak to Start automatic mode, it should be DI, not DO.
-3. DRA_Rev01.A113.DI2 and DRA_Rev01.A113.DI3 - they both shouls have another commentar (see the terminal above at this page).
+2. DRA_Rev01.A104.DO3 - it's signak to Start automatic mode, it should be DI, not DO. - DRA01.A90.A114.DI3 - RL8 Start Auto Relay
