@@ -96,7 +96,7 @@ External - RV2-1(DRM04_Rev_01.A111.DI0), L4.K034(DRM04_Rev01.A111.DI1) (F68 ... 
 RL13 = (RL33 OR RL23/C) AND RL39 AND RL12 AND (DRM04_Rev_01.A111.DI0 OR DRM04_Rev01.A111.DI1)
 
 DRM04_Rev01.A101.DO1 = RL13
-DRM04_Rev01.A101.DO2 = RL13
+DRM04_Rev01.A101.DO3 = RL13
 
 
 ////////////////////////////////////////////////////////////
@@ -134,7 +134,7 @@ RL14 - Control of the main contactor
 RL15 - Drive Healthy
 RL31 - Zero Speed
 
-Converter_setpoint = DRM04_Rev01.A104.AI0
+Converter_setpoint = DRA01_A91.A104.AI0
 
 ////////////////////////////////////////////////////////////
 //////////////////// page 6 ////////////////////////////////
@@ -186,11 +186,11 @@ Converter Tiltpot
 
 RL25 - Earth Fault from Earth fault Relay
 RL20 - Tilt Pot Health
-DRM04_Rev01.A102.DO2 = RL20
+DRA01_A91.A102.DO2 = RL20
 
 CON3 - Control of the main contactor
 RL20 - Drive Healthy
-DRM04_Rev01.A102.DO0 = RL25 AND RL20
+DRA01_A91.A102.DO0 = RL25 AND RL20
 Converter_setpoint = DRM04_Rev01.A104.AI1
 
 

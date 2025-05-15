@@ -1,0 +1,5 @@
+oil unit and cooling system
+
+1. isn't clear the logik of "Temperature Bearing" and "Cooling water", the limit and logik. Waht sgould we control?
+2. Why we are using oil Temperature in relay for heating and RIO?
+3. 

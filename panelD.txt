@@ -194,7 +194,7 @@ RL17 - Control the main contactor
 
 RL19 - Breast Roll1 Healthy
 DRA_Rev01.A102.DO0 = RL19
-Speed_setpoint = DRA_Rev01.A109.AI0 (RL60(MARAS Enable AND NOT RL63(Drive Enable)))
+Speed_setpoint = DRA01.A90.A109.AI0 (RL60(MARAS Enable AND NOT RL63(Drive Enable)))
 
 
 //////////////////////////////////////////////////////

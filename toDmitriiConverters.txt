@@ -26,7 +26,7 @@ Program Stop - RL1
 Coast Stop - RL2
 Speed Setpoint:
  - from Mill Control (Panel C) controlled by NOT RL33
- - from Mill Exit Panel (Panel K) - DRA01.A91.A104.AI0 controlled by RL33 
+ - from Mill Exit Panel (Panel K) - DRA01.A91.A104.AI0 controlled by RL33
 
 Output:
 Drive Helathy - RL15
@@ -46,7 +46,118 @@ Speed Setpoint:
 
 
  Output:
- Drive Helathy - RL20
+ Drive Healthy - RL20
+
+/////////////////////////////////////////////////////////
+
+Mill Screwdown1 (Right Hand):
+
+Input:
+Start - RL12 (time Delay) - "DB_PanelD".General.WORK.Timers[2].Q
+Enable - (RL21 OR RL13) AND RL57
+Program Stop - RL1
+Coast Stop - RL2
+Speed Setpoint:
+ - manual mode - controlled by not RL60
+ - from MARAS - DRA01.A90.A109.AI0 controlled by RL60 
+
+
+Output:
+ Drive Healthy - RL19
+ Zero Speed - RL20
+
+
+Mill Screwdown2 (Left Hand):
+
+Input:
+Start - RL12 (time Delay) AND NOT RL13 (time delay)
+Enable - CON10 AND RL57
+Program Stop - RL1
+Coast Stop - RL2
+Speed Setpoint:
+ - manual mode - controlled by not RL60
+ - from MARAS - DRA01.A90.A109.AI0 controlled by RL60 
+
+
+Output:
+ Drive Healthy - RL22
+ Drive Ready - RL21
+
+/////////////////////////////////////////////////////////
+
+EdgerScrewdown1 (Right Hand):
+
+Input:
+Start - RL23 (time Delay)
+Enable - RL34 AND NOT RL33
+C4 
+- If the drive is stationary this switch provides a Jog facility.
+- If the drive is running, this switch provides a Take-Up Slack facility.
+Jog(stationary)/Slack(running) - NOT RL33 (bullshit) 
+Program Stop - RL1
+Coast Stop - RL2
+Speed Setpoint:
+ - manual mode - controlled by NOT RL54
+ - auto mode - RL54 
+
+Output:
+ Drive Healthy - RL32
+ Zero Speed - RL33
+
+EdgerScrewdown2 (Left Hand):
+
+Input:
+Start - RL23 (time Delay)
+Enable - Drive Ready from EdgerScrewdown1 (B7)
+C8 - isn't clear 
+Program Stop - RL1
+Coast Stop - RL2
+Speed Setpoint:
+ - manual mode - controlled by NOT RL54
+ - auto mode - RL54 
+
+Output:
+ Drive Healthy - RL35
+ Drive Ready - RL34
+
+
+/////////////////////////////////////////////////////////
+
+Turntable (Right Hand):
+
+Input:
+Start - RL43 (time Delay)
+Enable - RL45 AND NOT RL49
+Jog(stationary)/Slack(running) - NOT RL49 (bullshit) 
+Program Stop - RL1
+Coast Stop - RL2
+Speed Setpoint:
+ - manual mode - controlled by NOT RL44
+ - auto mode - from panel C controlled by RL44
+
+Output:
+ Drive Healthy - RL48
+ Zero Speed - RL49
+
+
+Turntable (Left Hand):
+
+Input:
+Start - RL43 (time Delay)
+Enable - RL45 AND NOT RL51
+Jog(stationary)/Slack(running) - NOT RL51 (bullshit) 
+Program Stop - RL1
+Coast Stop - RL2
+Speed Setpoint:
+ - manual mode - controlled by NOT RL44
+ - auto mode - from panel C controlled by RL44
+
+Output:
+ Drive Healthy - RL50
+ Zero Speed - RL51
+
+
+
 
 
 Remarks:
@@ -62,25 +173,3 @@ DRA01.A91.A102.DO3
 DRA01.A91.A108.DI2
 DRA01.A91.A109.DI3
 DRA01.A91.A110.DI2 
-
-2. We need general rules for mapping!
-
-a)  // SPEED LIMIT SELECT 60 MPM. SPEED LIMIT 1
-    "IO_DB".Dig.IN.I34 := "I17_1";
-    //+MD11B01GRC-M101-12S. LUBE OIL. OIL FLOW  ND-END
-    "IO_DB".Dig.IN.I60 := "DRM01A3_A106_DI3";
-
-b)  According new EPLAN we have "DRA01A90_A114_DI3",butI107 is occupied!
-     //MILL EMERGENCY STOP
-    "IO_DB".Dig.IN.I106 := "DRA01A90_A114_DI2";
-
-    //############# =MD01E10+DRA01.A91 ##########
-
-    //ESTOP
-    "IO_DB".Dig.IN.I107 := "DRA01A91_A106_DI0";
-
-c)  // BREAST ROLL 1. CONTROL AVAILABLE
-    "Q10_1" := "DB_PanelF_BreastRolls".Drives.MCC.Out.RL6;
-
-    // BREAST ROLL 1. DRIVE OFF
-    "Q10_2" := "IO_DB".Dig.OUT.O15;

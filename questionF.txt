@@ -15,4 +15,4 @@ toDmitrii
 4. Don't forget about tilt pot lamp to pulpit!
 5. Don't forget send data from coverters to old PLC RL10 and others!
 6. Don't forget about RL26, we have DI but should DO! Tilt Pot!
-7. Don't forget about RL25 and RL20, converters!
+7. Don't forget about RL25 (earth fault) and RL20, converters!
